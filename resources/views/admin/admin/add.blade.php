@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Add New Admin')
+
 @section('content')
 
 <div class="content-wrapper">

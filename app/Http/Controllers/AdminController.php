@@ -11,14 +11,13 @@ class AdminController extends Controller
     public function list()
     {
         $data['getRecord'] = User::getAdmin();
-        $data['header_title'] = 'Admin List';
+        // $data['header_title'] = 'Admin List';
         return view('admin.admin.list',$data);
     }
 
     public function add()
     {
-        $data = 'Add New Admin';
-        return view('admin.admin.add',compact('data'));
+        return view('admin.admin.add');
     }
 
     public function insert(Request $request)
@@ -37,7 +36,6 @@ class AdminController extends Controller
         $data['getRecord'] = User::getSingle($id);
         if(!empty($data['getRecord']))
         {
-            $data['header_title'] = 'Edit Admin';
             return view('admin.admin.edit',$data);
         }
         else

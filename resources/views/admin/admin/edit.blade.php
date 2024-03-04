@@ -32,16 +32,17 @@
               <div class="card-body">
                 <div class="form-group">
                   <label>Name</label>
-                  <input type="text" class="form-control" placeholder="Name" name="name" value="{{ $getRecord->name }}" required>
+                  <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name', $getRecord->name) }}" required>
                 </div>
                 <div class="form-group">
                   <label>Email address</label>
-                  <input type="email" class="form-control" placeholder="Email address" name="email" value="{{ $getRecord->email }}" required>
+                  <input type="email" class="form-control" placeholder="Email address" name="email" value="{{ old('email', $getRecord->email) }}" required>
+                  <span class="text-danger">{{ $errors->first('email') }}</span>
                 </div>
                 <div class="form-group">
                   <label>Password</label>
                   <input type="text" class="form-control" placeholder="Password" name="password">
-                  <p>Do You Want To Change The Password ? Then Add New Password</p>
+                  <p style="font-weight: bold;">Do You Want To Change The Password ? Then Add New Password</p>
                 </div>
               </div>
               <div class="card-footer">

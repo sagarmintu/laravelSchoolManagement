@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 29, 2024 at 07:16 AM
+-- Generation Time: Mar 05, 2024 at 12:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `schoolmanagement`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class`
+--
+
+CREATE TABLE `class` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=active, 1=inactive',
+  `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=not, 1=yes',
+  `created_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `class`
+--
+
+INSERT INTO `class` (`id`, `name`, `status`, `is_delete`, `created_by`, `created_at`, `updated_at`) VALUES
+(1, 'Mathematics', 1, 0, 1, '2024-03-05 04:25:57', '2024-03-05 05:23:09'),
+(2, 'Physics', 0, 0, 1, '2024-03-05 04:33:15', '2024-03-05 04:33:15'),
+(3, 'English', 1, 0, 1, '2024-03-05 04:33:30', '2024-03-05 04:33:30'),
+(4, 'Hindi', 0, 1, 1, '2024-03-05 04:33:35', '2024-03-05 05:19:16'),
+(5, 'Biology', 1, 0, 1, '2024-03-05 04:33:44', '2024-03-05 05:15:41'),
+(6, 'Oriya', 0, 0, 1, '2024-03-05 04:33:51', '2024-03-05 04:33:51');
 
 -- --------------------------------------------------------
 
@@ -57,7 +85,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2024_03_05_085839_create_classs_table', 2),
+(6, '2024_03_05_091325_drop_classs_table', 3),
+(7, '2024_03_05_091442_create_class_table', 4),
+(8, '2024_03_05_091947_add_created_by_to_class_table', 5),
+(9, '2024_03_05_093941_add_is_delete_to_class_table', 6),
+(10, '2024_03_05_110310_create_subjects_table', 7);
 
 -- --------------------------------------------------------
 
@@ -93,6 +127,32 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=active, 1=inactive',
+  `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=not, 1=yes',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`, `type`, `created_by`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 'Integration', 'Practical', 1, 0, 0, '2024-03-05 05:55:30', '2024-03-05 06:07:03'),
+(2, 'Diversity of Living Organisms', 'Theory', 1, 0, 0, '2024-03-05 05:58:06', '2024-03-05 06:06:30'),
+(3, 'A Letter to God', 'Theory', 1, 1, 1, '2024-03-05 06:08:30', '2024-03-05 06:10:35');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -104,6 +164,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `user_type` tinyint(4) NOT NULL DEFAULT 3 COMMENT '1:admin, 2:teacher, 3:student, 4:parent',
+  `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0:not deleted, 1:deleted',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -112,15 +173,24 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `user_type`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'CeDrJqVJmIIYF279yHOQqwjPKw4ZKeFyw9zemeWQ5y5M577tKCQKlDd1Jjgj', 1, '2024-02-28 11:13:57', '2024-02-28 11:13:57'),
-(2, 'Teacher', 'teacher@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'xP8KjwIy1byAJUztB4zxCThAVAIEw39PxzamMyzmc79q4R3MI8zJqKU1dv6k', 2, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
-(3, 'Student', 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', 3, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
-(4, 'Parent', 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', 4, '2024-02-29 11:13:57', '2024-02-29 11:13:57');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `user_type`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin@gmail.com', NULL, '$2y$10$kFh.ORYUvUROj3ynJCnmk.oTJEnowpD3ZeVYokpuAbhAgBiuqSeGC', 'HEy4O0YpigL6BcuLwbiUTB26mNL7AZ2bQgVIlbfCke890IPYXs7qPhHipxCD', 1, 0, '2024-02-28 11:13:57', '2024-03-01 00:14:13'),
+(2, 'Teacher', 'teacher@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'xP8KjwIy1byAJUztB4zxCThAVAIEw39PxzamMyzmc79q4R3MI8zJqKU1dv6k', 2, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
+(3, 'Student', 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', 3, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
+(4, 'Parent', 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', 4, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
+(5, 'Sagar Behera', 'sagarkumar@ralecon.com', NULL, '$2y$10$dMYDQcKhcLRRLpC3qVPP7OzgQ4Bqpax2cuIXaTqSuV5/rILJqcRey', NULL, 1, 0, '2024-03-01 01:01:22', '2024-03-03 23:14:12'),
+(6, 'demo', 'demo@gmail.com', NULL, '$2y$10$dMYDQcKhcLRRLpC3qVPP7OzgQ4Bqpax2cuIXaTqSuV5/rILJqcRey', NULL, 1, 1, '2024-03-04 04:48:23', '2024-03-03 23:23:59'),
+(7, 'kathiravan  v', 'kathir@ralecon.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, 1, 0, '2024-03-04 00:33:12', '2024-03-04 00:37:19');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `class`
+--
+ALTER TABLE `class`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -150,6 +220,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -161,6 +237,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `class`
+--
+ALTER TABLE `class`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -170,7 +252,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -179,10 +261,16 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

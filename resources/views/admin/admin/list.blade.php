@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'List Admin')
+@section('title', 'Admin List')
 
 @section('content')
 
@@ -78,7 +78,7 @@
                     <td>{{ $data->email }}</td>
                     <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
                     <td>
-                      <a href="{{ url('admin/admin/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                      <a href="{{ url('admin/admin/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
                       <a href="{{ url('admin/admin/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                     </td>
                   </tr>

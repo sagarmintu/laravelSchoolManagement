@@ -41,4 +41,15 @@ class ClassModel extends Model
     {
         return self::findOrFail($id);
     }
+
+    static public function getClass()
+    {
+        $classDetails = ClassModel::select('class.*')
+                            ->join('users','users.id','class.created_by')
+                            ->where('class.is_delete','=', 0)
+                            ->where('class.status','=', 0)
+                            ->orderBy('class.name','asc')
+                            ->get();
+        return $classDetails;
+    }
 }

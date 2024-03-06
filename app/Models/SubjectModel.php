@@ -48,4 +48,15 @@ class SubjectModel extends Model
     {
         return self::findOrFail($id);
     }
+
+    static public function getSubject()
+    {
+        $classDetails = SubjectModel::select('subjects.*')
+                            ->join('users','users.id','subjects.created_by')
+                            ->where('subjects.is_delete','=', 0)
+                            ->where('subjects.status','=', 0)
+                            ->orderBy('subjects.name','asc')
+                            ->get();
+        return $classDetails;
+    }
 }

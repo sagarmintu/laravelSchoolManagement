@@ -90,6 +90,7 @@
                                             <td>
                                                 <a href="{{ url('admin/assign_subject/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
                                                 <a href="{{ url('admin/assign_subject/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                                <a href="{{ url('admin/assign_subject/edit_single/'.$data->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Single Edit</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -34,21 +34,25 @@
                                     <div class="form-group col-md-6">
                                         <label>First Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name') }}" required>
+                                        <div class="text-danger">{{ $errors->first('name') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Last Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}" required>
+                                        <div class="text-danger">{{ $errors->first('last_name') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Admission Number <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" placeholder="Admission Number" name="admission_number" value="{{ old('admission_number') }}" required>
+                                        <div class="text-danger">{{ $errors->first('admission_number') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Roll Number</label>
                                         <input type="text" class="form-control" placeholder="Roll Number" name="roll_number" value="{{ old('roll_number') }}">
+                                        <div class="text-danger">{{ $errors->first('roll_number') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
@@ -56,73 +60,85 @@
                                         <select name="class_id" class="form-control" required>
                                             <option value="">Select class</option>
                                             @foreach($getClass as $class)
-                                             <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                             <option {{ (old('class_id') == $class->id) ? 'selected' : '' }} value="{{ $class->id }}">{{ $class->name }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="text-danger">{{ $errors->first('class_id') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Gender <span class="text-danger">*</span></label>
                                         <select name="gender" class="form-control" required>
                                             <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
+                                            <option {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
+                                            <option {{ (old('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
+                                            <option {{ (old('gender') == 'Other') ? 'selected' : '' }} value="Other">Other</option>
                                         </select>
+                                        <div class="text-danger">{{ $errors->first('gender') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Date Of Birth <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
+                                        <div class="text-danger">{{ $errors->first('date_of_birth') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Caste</label>
                                         <input type="text" class="form-control" placeholder="Enter Caste" name="caste" value="{{ old('caste') }}">
+                                        <div class="text-danger">{{ $errors->first('caste') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Religion</label>
                                         <input type="text" class="form-control" placeholder="Enter Religion" name="religion" value="{{ old('religion') }}">
+                                        <div class="text-danger">{{ $errors->first('religion') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Mobile Number</label>
                                         <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number" value="{{ old('mobile_number') }}">
+                                        <div class="text-danger">{{ $errors->first('mobile_number') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Admission Date <span class="text-danger">*</span></label>
                                         <input type="date" class="form-control" placeholder="Enter Mobile Number" name="admission_date" value="{{ old('admission_date') }}">
+                                        <div class="text-danger">{{ $errors->first('admission_date') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Profile Picture</label>
                                         <input type="file" class="form-control" name="profile_picture">
+                                        <div class="text-danger">{{ $errors->first('profile_picture') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Blood Group <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="blood_group" value="{{ old('blood_group') }}" placeholder="Enter Blood Group" required>
+                                        <div class="text-danger">{{ $errors->first('blood_group') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Height <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="height" value="{{ old('height') }}" placeholder="Enter Height" required>
+                                        <div class="text-danger">{{ $errors->first('height') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Weight <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="weight" value="{{ old('weight') }}" placeholder="Enter Weight" required>
+                                        <div class="text-danger">{{ $errors->first('weight') }}</div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Status </label>
                                         <select name="status" class="form-control" required>
                                             <option value="">Select Status</option>
-                                            <option value="0">Active</option>
-                                            <option value="1">Inactive</option>
+                                            <option {{ (old('status') == 0) ? 'selected' : '' }} value="0">Active</option>
+                                            <option {{ (old('status') == 1) ? 'selected' : '' }} value="1">Inactive</option>
                                         </select>
+                                        <div class="text-danger">{{ $errors->first('status') }}</div>
                                     </div>
                                 </div>
 
@@ -131,7 +147,7 @@
                                 <div class="form-group">
                                     <label>Email address <span class="text-danger">*</span></label>
                                     <input type="email" class="form-control" placeholder="Email address" name="email" value="{{ old('email') }}" required>
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
                                 </div>
 
                                 <div class="form-group">

@@ -94,4 +94,16 @@ class User extends Authenticatable
                          
         return $return;
     }
+
+    public function getProfile()
+    {
+        if(!empty($this->profile_picture) && file_exists('upload/profile/'.$this->profile_picture))
+        {
+            return url('upload/profile/'.$this->profile_picture);
+        }
+        else
+        {
+            return "";
+        }
+    }
 }

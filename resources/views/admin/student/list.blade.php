@@ -35,6 +35,7 @@
                                         <th style="width: 10px">#</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Profile</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -45,10 +46,17 @@
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->name }}</td>
                                         <td>{{ $data->email }}</td>
+                                        <td>
+                                            @if($data->profile_picture !='' && file_exists(public_path().'/upload/profile/'.$data->profile_picture))
+                                                <img src="{{ url('upload/profile/'.$data->profile_picture) }}" width="50" height="50" class="rounded-circle" />
+                                            @else
+                                                <img src="{{ url('upload/profile/avatar.jpg') }}" width="50" height="50" class="rounded-circle" />
+                                            @endif
+                                        </td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
                                         <td>
-                                            <a href="{{ url('admin/admin/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
-                                            <a href="{{ url('admin/admin/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                            <a href="{{ url('admin/student/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
+                                            <a href="{{ url('admin/student/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

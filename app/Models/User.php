@@ -82,4 +82,16 @@ class User extends Authenticatable
     {
         return self::findOrFail($id);
     }
+
+    static public function getStudent()
+    {
+        $return = self::select('users.*')
+                    ->where('users.user_type','=',3)
+                    ->where('users.is_delete','=',0);
+                    
+        $return = $return->orderby('users.id','asc')
+                         ->paginate(10);
+                         
+        return $return;
+    }
 }

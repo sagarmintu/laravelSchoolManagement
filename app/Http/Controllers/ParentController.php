@@ -124,4 +124,29 @@ class ParentController extends Controller
             abort(404);
         }
     }
+
+    public function myStudent($id)
+    {
+        $data['getParent'] = User::getSingle($id);
+        $data['parent_id'] = $id;
+        $data['getSearchStudent'] = User::getSearchStudent();
+        $data['getRecord'] = User::getMyStudent($id);
+        return view('admin.parent.myStudent',$data);
+    }
+
+    public function AddStudentToParent($student_id, $parent_id)
+    {
+        $student = User::getSingle($student_id);
+        $student->parent_id = $parent_id;
+        $student->save();
+        return redirect()->back()->with('success', 'Student Successfully Assisgned To Parent');
+    }
+
+    public function deleteStudentToParent($student_id)
+    {
+        $student = User::getSingle($student_id);
+        $student->parent_id = null;
+        $student->save();
+        return redirect()->back()->with('success', 'Deleted The Student Assisgned To Parent');
+    }
 }

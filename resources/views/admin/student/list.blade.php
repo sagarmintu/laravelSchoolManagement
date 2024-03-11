@@ -116,6 +116,7 @@
                                         <th style="width: 10px">#</th>
                                         <th>Profile</th>
                                         <th>Name</th>
+                                        <th>Parent Name</th>
                                         <th>Email</th>
                                         <th>Admission Number</th>
                                         <th>Roll Number</th>
@@ -145,7 +146,8 @@
                                             <img src="{{ url('upload/profile/avatar.jpg') }}" width="50" height="50" class="rounded-circle" />
                                             @endif
                                         </td>
-                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->name }} {{ $data->last_name }}</td>
+                                        <td>{{ $data->parent_name }} {{ $data->parent_lastname}}</td>
                                         <td>{{ $data->email }}</td>
                                         <td>{{ $data->admission_number }}</td>
                                         <td>{{ $data->roll_number }}</td>

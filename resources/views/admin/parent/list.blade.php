@@ -131,9 +131,10 @@
                                             @endif
                                         </td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
-                                        <td style="min-width: 200px;">
+                                        <td>
                                             <a href="{{ url('admin/parent/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
                                             <a href="{{ url('admin/parent/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                            <a href="{{ url('admin/parent/my_student/'.$data->id) }}" class="btn btn-primary btn-sm">My Student</a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -1,18 +1,28 @@
 @extends('layouts.app')
 
-@section('title', 'Student List')
+@section('title', 'Teacher List')
 
 @section('content')
+
+<style>
+    .table .note_details {
+        display: inline-block;
+        width: 180px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Student List (Total Record: {{ $getRecord->total() }})</h1>
+                    <h1>Teacher List (Total Record: {{ $getRecord->total() }})</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a href="{{ url('admin/student/add') }}" class="btn btn-primary btn-sm" style="float: inline-end;"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                    <a href="{{ url('admin/teacher/add') }}" class="btn btn-primary btn-sm" style="float: inline-end;"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                 </div>
             </div>
         </div>
@@ -25,7 +35,7 @@
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Search Student</h3>
+                            <h3 class="card-title">Search Teacher</h3>
                         </div>
                         <form action="" method="get">
                             <div class="card-body">
@@ -43,18 +53,6 @@
                                         <input type="text" class="form-control" placeholder="Email address" name="email" value="{{ Request::get('email') }}">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Admission Number</label>
-                                        <input type="text" class="form-control" placeholder="Admission Number" name="admission_number" value="{{ Request::get('admission_number') }}">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Roll Number</label>
-                                        <input type="text" class="form-control" placeholder="Roll Number" name="roll_number" value="{{ Request::get('roll_number') }}">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Class</label>
-                                        <input type="text" class="form-control" placeholder="Class" name="class" value="{{ Request::get('class') }}">
-                                    </div>
-                                    <div class="form-group col-md-2">
                                         <label>Gender</label>
                                         <select name="gender" class="form-control">
                                             <option value="">Select Gender</option>
@@ -64,24 +62,16 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Caste</label>
-                                        <input type="text" class="form-control" placeholder="Caste" name="caste" value="{{ Request::get('caste') }}">
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label>Religion</label>
-                                        <input type="text" class="form-control" placeholder="Enter Religion" name="religion" value="{{ Request::get('religion') }}">
-                                    </div>
-                                    <div class="form-group col-md-2">
                                         <label>Mobile Number</label>
                                         <input type="text" class="form-control" placeholder="Mobile Number" name="mobile_number" value="{{ Request::get('mobile_number') }}">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Blood Group</label>
-                                        <input type="text" class="form-control" placeholder="Blood Group" name="blood_group" value="{{ Request::get('blood_group') }}">
+                                        <label>Marital Status</label>
+                                        <input type="text" class="form-control" placeholder="Marital Status" name="marital_status" value="{{ Request::get('marital_status') }}">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label>Admission Date</label>
-                                        <input type="date" class="form-control" name="admission_date" value="{{ Request::get('admission_date') }}">
+                                        <label>Current Address</label>
+                                        <input type="text" class="form-control" placeholder="Address" name="address" value="{{ Request::get('address') }}">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>Status</label>
@@ -92,12 +82,16 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
+                                        <label>Date Of Joining</label>
+                                        <input type="date" class="form-control" name="admission_date" value="{{ Request::get('admission_date') }}">
+                                    </div>
+                                    <div class="form-group col-md-2">
                                         <label>Created Date</label>
                                         <input type="date" class="form-control" name="date" value="{{ Request::get('date') }}">
                                     </div>
                                     <div class="form-group col-md-3">
                                         <button class="btn btn-primary btn-sm" type="submit" style="margin-top: 34px;">Search</button>
-                                        <a href="{{ url('admin/student/list') }}" class="btn btn-success btn-sm" type="submit" style="margin-top: 34px;">Clear</a>
+                                        <a href="{{ url('admin/teacher/list') }}" class="btn btn-success btn-sm" type="submit" style="margin-top: 34px;">Clear</a>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +101,7 @@
                     @include('message')
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Student List</h3>
+                            <h3 class="card-title">Teacher List</h3>
                         </div>
                         <div class="card-body p-0" style="overflow: auto;">
                             <table class="table table-striped">
@@ -116,20 +110,17 @@
                                         <th style="width: 10px">#</th>
                                         <th>Profile</th>
                                         <th>Name</th>
-                                        <th>Parent Name</th>
                                         <th>Email</th>
-                                        <th>Admission Number</th>
-                                        <th>Roll Number</th>
-                                        <th>Class</th>
                                         <th>Gender</th>
                                         <th>Date Of Birth</th>
-                                        <th>Caste</th>
-                                        <th>Religion</th>
-                                        <th>Mobile Number</th>
-                                        <th>Admission Date</th>
-                                        <th>Blood Group</th>
-                                        <th>Height</th>
-                                        <th>Weight</th>
+                                        <th>Date Of Joining</th>
+                                        <th>Phone</th>
+                                        <th>Marital Status</th>
+                                        <th>Current Address</th>
+                                        <th>Permanent Address</th>
+                                        <th>Qualification</th>
+                                        <th>Work Experience</th>
+                                        <th>Note</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
@@ -147,30 +138,25 @@
                                             @endif
                                         </td>
                                         <td>{{ $data->name }} {{ $data->last_name }}</td>
-                                        <td>{{ $data->parent_name }} {{ $data->parent_lastname}}</td>
                                         <td>{{ $data->email }}</td>
-                                        <td>{{ $data->admission_number }}</td>
-                                        <td>{{ $data->roll_number }}</td>
-                                        <td>{{ $data->class_name }}</td>
                                         <td>{{ $data->gender }}</td>
-
                                         <td>
                                             @if(!empty($data->date_of_birth))
                                             {{ date('d-m-Y', strtotime($data->date_of_birth)) }}
                                             @endif
                                         </td>
-
-                                        <td>{{ $data->caste }}</td>
-                                        <td>{{ $data->religion }}</td>
-                                        <td>{{ $data->mobile_number }}</td>
                                         <td>
                                             @if(!empty($data->admission_date))
                                             {{ date('d-m-Y', strtotime($data->admission_date)) }}
                                             @endif
                                         </td>
-                                        <td>{{ $data->blood_group }}</td>
-                                        <td>{{ $data->height }}</td>
-                                        <td>{{ $data->weight }}</td>
+                                        <td>{{ $data->mobile_number }}</td>
+                                        <td>{{ $data->marital_status }}</td>
+                                        <td>{{ $data->address }}</td>
+                                        <td>{{ $data->permanent_address }}</td>
+                                        <td>{{ $data->qualification }}</td>
+                                        <td>{{ $data->work_experience }}</td>
+                                        <td class="note_details">{{ $data->note }}</td>
                                         <td>
                                             @if ($data->status == 0)
                                             <span class="badge badge-success">Active</span>
@@ -180,8 +166,8 @@
                                         </td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
                                         <td style="min-width: 200px;">
-                                            <a href="{{ url('admin/student/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
-                                            <a href="{{ url('admin/student/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+                                            <a href="{{ url('admin/teacher/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
+                                            <a href="{{ url('admin/teacher/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

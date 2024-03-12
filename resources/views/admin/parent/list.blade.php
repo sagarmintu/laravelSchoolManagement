@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label>Status</label>
-                                        <select name="gender" class="form-control">
+                                        <select name="status" class="form-control">
                                             <option value="">Select Status</option>
                                             <option {{ (Request::get('status') == 100) ? 'selected' : '' }} value="100">Active</option>
                                             <option {{ (Request::get('status') == 1) ? 'selected' : '' }} value="1">Inactive</option>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2024 at 11:06 AM
+-- Generation Time: Mar 11, 2024 at 01:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -192,6 +192,7 @@ INSERT INTO `subjects` (`id`, `name`, `type`, `created_by`, `status`, `is_delete
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
@@ -211,6 +212,13 @@ CREATE TABLE `users` (
   `blood_group` varchar(10) DEFAULT NULL,
   `height` varchar(10) DEFAULT NULL,
   `weight` varchar(10) DEFAULT NULL,
+  `occupation` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `marital_status` varchar(255) DEFAULT NULL,
+  `permanent_address` varchar(255) DEFAULT NULL,
+  `qualification` varchar(255) DEFAULT NULL,
+  `work_experience` varchar(255) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
   `user_type` tinyint(4) NOT NULL DEFAULT 3 COMMENT '1:admin, 2:teacher, 3:student, 4:parent',
   `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0:not deleted, 1:deleted',
   `status` tinyint(4) DEFAULT 0 COMMENT '0:active, 1:inactive',
@@ -222,16 +230,19 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_picture`, `blood_group`, `height`, `weight`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'dmF7CU0nCzjuThGNxbD0fwYGqDIcYqZPM6rpgnjTUPQRDTpBemrDkpLIwcdA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-06 04:13:27'),
-(2, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$pC0eMecp6P/czLiu/RZjUeMlGMQ3IhocM2qvnnyqvGkH6cttX3YfG', 'm3m2Fj9ZWERrdT6y2AtDFlwwh2fJy2GUWD11gBTsY5KgoJnG53UPcF8sE9Tl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 0, '2024-02-29 11:13:57', '2024-03-06 04:15:24'),
-(3, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
-(4, 'Parent', NULL, 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
-(5, 'Sagar Behera', NULL, 'sagarkumar@ralecon.com', NULL, '$2y$10$dMYDQcKhcLRRLpC3qVPP7OzgQ4Bqpax2cuIXaTqSuV5/rILJqcRey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-03-01 01:01:22', '2024-03-03 23:14:12'),
-(6, 'demo', NULL, 'demo@gmail.com', NULL, '$2y$10$dMYDQcKhcLRRLpC3qVPP7OzgQ4Bqpax2cuIXaTqSuV5/rILJqcRey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 0, '2024-03-04 04:48:23', '2024-03-03 23:23:59'),
-(7, 'kathiravan  v', NULL, 'kathir@ralecon.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-03-04 00:33:12', '2024-03-04 00:37:19'),
-(12, 'Rutuparna', 'Panda', 'rutuparna.panda123@yahoo.com', NULL, 'sagarmintu@123', NULL, '987123658', '963258916', 6, 'Female', '1999-09-24', 'General', 'Hindu', '9874563217', '2017-11-17', 'dyhogubr9bygaunuubr4.jpg', 'AB+', '5.5', '58', 3, 0, 1, '2024-03-06 22:29:48', '2024-03-07 02:03:31'),
-(13, 'Sanjeeb', 'Das', 'sanjeebdas123@yahoo.com', NULL, 'sagarmintu@123', NULL, '987123657', '9632587', 2, 'Male', '1994-07-25', 'General', '', '9874563218', '2019-02-04', 's28aggazwpidzynbuwi0.jpg', 'B+', '6.0', '75', 3, 1, 1, '2024-03-06 22:32:15', '2024-03-07 02:09:45');
+INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_picture`, `blood_group`, `height`, `weight`, `occupation`, `address`, `marital_status`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'vIIPsb0sbpmxBwwdD8B3xPRhb5XgKILE6UcPZ9LJ7jgBDxO0eeacudhc565C', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-06 04:13:27'),
+(2, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$pC0eMecp6P/czLiu/RZjUeMlGMQ3IhocM2qvnnyqvGkH6cttX3YfG', 'm3m2Fj9ZWERrdT6y2AtDFlwwh2fJy2GUWD11gBTsY5KgoJnG53UPcF8sE9Tl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 0, '2024-02-29 11:13:57', '2024-03-06 04:15:24'),
+(3, NULL, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
+(4, NULL, 'Parent', NULL, 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
+(5, NULL, 'Sagar Behera', NULL, 'sagarkumar@ralecon.com', NULL, '$2y$10$dMYDQcKhcLRRLpC3qVPP7OzgQ4Bqpax2cuIXaTqSuV5/rILJqcRey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-03-01 01:01:22', '2024-03-03 23:14:12'),
+(6, NULL, 'demo', NULL, 'demo@gmail.com', NULL, '$2y$10$dMYDQcKhcLRRLpC3qVPP7OzgQ4Bqpax2cuIXaTqSuV5/rILJqcRey', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 0, '2024-03-04 04:48:23', '2024-03-03 23:23:59'),
+(7, NULL, 'kathiravan  v', NULL, 'kathir@ralecon.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-03-04 00:33:12', '2024-03-04 00:37:19'),
+(12, 15, 'Rutuparna', 'Panda', 'rutuparna.panda123@yahoo.com', NULL, 'sagarmintu@123', NULL, '987123658', '963258916', 6, 'Female', '1999-09-24', 'General', 'Hindu', '9874563217', '2017-11-17', 'dyhogubr9bygaunuubr4.jpg', 'AB+', '5.5', '58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 1, '2024-03-06 22:29:48', '2024-03-11 04:00:20'),
+(13, NULL, 'Sanjeeb', 'Das', 'sanjeebdas123@yahoo.com', NULL, 'sagarmintu@123', NULL, '987123657', '9632587', 2, 'Male', '1994-07-25', 'General', '', '9874563218', '2019-02-04', 's28aggazwpidzynbuwi0.jpg', 'B+', '6.0', '75', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 1, 1, '2024-03-06 22:32:15', '2024-03-07 02:09:45'),
+(14, 15, 'Prabhudatta', 'Rout', 'prabhudatta.rout123@gmail.com', NULL, 'sagarmintu@123', NULL, '987123650', '9632582', 2, 'Male', '1995-03-18', 'General', 'Hindu', '9874563210', '2020-07-30', 'xp719ko4mg1gk35uncw6.jpg', 'AB-', '6.3', '75', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-03-07 21:26:58', '2024-03-11 04:24:08'),
+(15, NULL, 'Sanjay', 'Biswal', 'sanjay.biswal79@yahoo.com', NULL, 'sagarmintu', NULL, NULL, NULL, NULL, 'Male', NULL, NULL, NULL, '6340851322', NULL, 'roweguspyvz0jikjxtkm.jpg', NULL, NULL, NULL, 'Math Professor', 'Odisha, Bhubaneswar', NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-03-10 22:39:21', '2024-03-10 23:03:02'),
+(16, NULL, 'Prative', 'Behera', 'prativa.behera97@gmail.com', NULL, 'sagarmintu@123', NULL, NULL, NULL, NULL, 'Female', NULL, NULL, NULL, '9874563213', NULL, 'xg0yfi8wk01btg4cemgf.jpg', NULL, NULL, NULL, 'Professor', 'Odisha, Bhubaneswar', NULL, NULL, NULL, NULL, NULL, 4, 0, 1, '2024-03-10 22:41:27', '2024-03-10 23:03:06');
 
 --
 -- Indexes for dumped tables
@@ -333,7 +344,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

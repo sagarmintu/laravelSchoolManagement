@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Parent Dashboard')
+
 @section('content')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -33,9 +35,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>{{ $totalParentCount }}</h3>
 
-                <p>New Orders</p>
+                <p>No Of Parent</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>

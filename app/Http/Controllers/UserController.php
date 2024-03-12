@@ -42,6 +42,10 @@ class UserController extends Controller
         {
             return view('student.my_account', $data);
         }
+        else if(Auth::user()->user_type == 4)
+        {
+            return view('parent.my_account', $data);
+        }
     }
 
     public function updateMyAccount(Request $request)
@@ -136,6 +140,44 @@ class UserController extends Controller
         $student->weight = trim($request->weight);
         $student->email = trim($request->email);
         $student->save();
+        return redirect()->back()->with('success', 'Account Details Are Updated');
+    }
+
+    public function updateTeacherAccount(Request $request)
+    {
+        $id = Auth::user()->id;
+
+        request()->validate([
+            'email' => 'required|email|unique:users',
+            'address' => 'max:255',
+            'occupation' => 'max:255',
+            'mobile_number' => 'max:15|min:8',
+        ]);
+
+        $parent = User::getSingle($id);
+        $parent->name = trim($request->name);
+        $parent->last_name = trim($request->last_name);
+        $parent->gender = trim($request->gender);
+
+        if(!empty($request->file('profile_picture')))
+        {
+            if(!empty($parent->getProfile()))
+            {
+                unlink('upload/profile/'.$parent->profile_picture);
+            }
+            $extension = $request->file('profile_picture')->getClientOriginalExtension();
+            $file = $request->file('profile_picture');
+            $randomStr = Str::random(20);
+            $filename = strtolower($randomStr).'.'.$extension;
+            $file->move('upload/profile/', $filename);
+            $parent->profile_picture = $filename;
+        }
+
+        $parent->occupation = trim($request->occupation);
+        $parent->mobile_number = trim($request->mobile_number);
+        $parent->address = trim($request->address);
+        $parent->email = trim($request->email);
+        $parent->save();
         return redirect()->back()->with('success', 'Account Details Are Updated');
     }
 }

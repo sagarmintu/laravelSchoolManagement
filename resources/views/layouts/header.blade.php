@@ -216,6 +216,12 @@
               <p>Change Password</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('student/account') }}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>My Account</p>
+            </a>
+          </li>
 
         @elseif(Auth::user()->user_type == 4)
 

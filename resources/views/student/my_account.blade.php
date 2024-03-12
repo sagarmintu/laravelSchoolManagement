@@ -1,0 +1,128 @@
+@extends('layouts.app')
+
+@section('title', 'My Account')
+
+@section('content')
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Student Details</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    @include('message')
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">My Account</h3>
+                        </div>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>First Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Name" name="name" value="{{ old('name', $getRecord->name) }}" required>
+                                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Last Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ old('last_name', $getRecord->last_name) }}" required>
+                                        <div class="text-danger">{{ $errors->first('last_name') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Gender <span class="text-danger">*</span></label>
+                                        <select name="gender" class="form-control" required>
+                                            <option value="">Select Gender</option>
+                                            <option {{ (old('gender', $getRecord->gender) == 'Male') ? 'selected' : '' }} value="Male">Male</option>
+                                            <option {{ (old('gender', $getRecord->gender) == 'Female') ? 'selected' : '' }} value="Female">Female</option>
+                                            <option {{ (old('gender', $getRecord->gender) == 'Other') ? 'selected' : '' }} value="Other">Other</option>
+                                        </select>
+                                        <div class="text-danger">{{ $errors->first('gender') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Date Of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', $getRecord->date_of_birth) }}" required>
+                                        <div class="text-danger">{{ $errors->first('date_of_birth') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Caste</label>
+                                        <input type="text" class="form-control" placeholder="Enter Caste" name="caste" value="{{ old('caste', $getRecord->caste) }}">
+                                        <div class="text-danger">{{ $errors->first('caste') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Religion</label>
+                                        <input type="text" class="form-control" placeholder="Enter Religion" name="religion" value="{{ old('religion', $getRecord->religion) }}">
+                                        <div class="text-danger">{{ $errors->first('religion') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Mobile Number</label>
+                                        <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number" value="{{ old('mobile_number', $getRecord->mobile_number) }}">
+                                        <div class="text-danger">{{ $errors->first('mobile_number') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Profile Picture</label>
+                                        <input type="file" class="form-control" name="profile_picture">
+                                        <div class="text-danger">{{ $errors->first('profile_picture') }}</div>
+                                        @if(!empty($getRecord->getProfile()))
+                                        <img src="{{ $getRecord->getProfile() }}" style="width: auto; height: 50px;">
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Blood Group <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="blood_group" value="{{ old('blood_group', $getRecord->blood_group) }}" placeholder="Enter Blood Group" required>
+                                        <div class="text-danger">{{ $errors->first('blood_group') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Height <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="height" value="{{ old('height', $getRecord->height) }}" placeholder="Enter Height" required>
+                                        <div class="text-danger">{{ $errors->first('height') }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Weight <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="weight" value="{{ old('weight', $getRecord->weight) }}" placeholder="Enter Weight" required>
+                                        <div class="text-danger">{{ $errors->first('weight') }}</div>
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                    <label>Email address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" placeholder="Email address" name="email" value="{{ old('email', $getRecord->email) }}" required>
+                                    <div class="text-danger">{{ $errors->first('email') }}</div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success" name="submit" value="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@endsection

@@ -89,6 +89,9 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'edit_single']);
     Route::post('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'update_single']);
 
+    Route::get('admin/account', [UserController::class, 'myAccount']);
+    Route::post('admin/account', [UserController::class, 'updateAdminAccount']);
+
     Route::get('admin/change_password', [UserController::class, 'change_password']);
     Route::post('admin/change_password', [UserController::class, 'update_change_password']);
 

@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Parent Student List (Total Record: {{ $getParent->name }} {{ $getParent->last_name }})</h1>
+                    <h1>Parent Name : {{ $getParent->name }} {{ $getParent->last_name }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <a href="{{ url('admin/parent/list') }}" class="btn btn-primary btn-sm" style="float: inline-end;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>

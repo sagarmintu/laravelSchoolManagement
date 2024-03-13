@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\AssignClassTeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,10 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'edit_single']);
     Route::post('admin/assign_subject/edit_single/{id}', [ClassSubjectController::class, 'update_single']);
 
+    Route::get('admin/assign_class_teacher/list', [AssignClassTeacherController::class, 'list']);
+    Route::get('admin/assign_class_teacher/add', [AssignClassTeacherController::class, 'add']);
+    Route::post('admin/assign_class_teacher/add', [AssignClassTeacherController::class, 'insert']);
+
     Route::get('admin/account', [UserController::class, 'myAccount']);
     Route::post('admin/account', [UserController::class, 'updateAdminAccount']);
 
@@ -132,6 +137,6 @@ Route::group(['middleware' => 'parent'], function() {
     Route::post('parent/account', [UserController::class, 'updateTeacherAccount']);
 
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
-    
+
     Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'subjectList']);
 });

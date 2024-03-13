@@ -304,4 +304,14 @@ class User extends Authenticatable
         $return = $return->orderBy('id', 'asc')->paginate(20);
         return $return;
     }
+
+    static public function getTeacherClass()
+    {
+        $return = self::select('users.*')
+            ->where('user_type', '=', 2)
+            ->where('is_delete', '=', 0);
+
+        $return = $return->orderBy('id', 'asc')->get();
+        return $return;
+    }
 }

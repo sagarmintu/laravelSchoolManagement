@@ -47,7 +47,7 @@
                                     <tr>
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->class_name }}</td>
-                                        <td>{{ $data->teacher_name }}</td>
+                                        <td>{{ $data->teacher_name }} {{ $data->teacher_last_name}}</td>
                                         <td>
                                             @if ($data->status == 0)
                                             <span class="badge badge-success">Active</span>
@@ -59,8 +59,10 @@
                                         <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
                                         <td>
                                             <a href="{{ url('admin/assign_class_teacher/edit/'.$data->id) }}" class="btn btn-success btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit</a>
-                                            
+
                                             <a href="{{ url('admin/assign_class_teacher/delete/'.$data->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+
+                                            <a href="{{ url('admin/assign_class_teacher/edit_single/'.$data->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-trash" aria-hidden="true"></i> Single Edit</a>
                                         </td>
                                     </tr>
                                     @endforeach

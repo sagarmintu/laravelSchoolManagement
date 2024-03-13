@@ -20,7 +20,7 @@ class AssignClassTeacherModel extends Model
 
     static public function getRecord()
     {
-        $return = self::select('assign_class_teacher.*', 'class.name as class_name', 'teacher.name as teacher_name', 'users.name as created_by_name')
+        $return = self::select('assign_class_teacher.*', 'class.name as class_name', 'teacher.name as teacher_name', 'teacher.last_name as teacher_last_name', 'users.name as created_by_name')
                     ->join('users as teacher', 'teacher.id', '=', 'assign_class_teacher.teacher_id')
                     ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
                     ->join('users', 'users.id', '=', 'assign_class_teacher.created_by')
@@ -35,5 +35,20 @@ class AssignClassTeacherModel extends Model
     static public function getAlreadyFirst($class_id, $teacher_id)
     {
         return self::where('class_id','=',$class_id)->where('teacher_id','=',$teacher_id)->first();
+    }
+
+    static public function getSingle($id)
+    {
+        return self::findOrFail($id);
+    }
+
+    static public function getAssignTeacherId($class_id)
+    {
+        return self::where('class_id','=',$class_id)->where('is_delete','=', 0)->get();
+    }
+
+    static public function deleteTeacher($class_id)
+    {
+        return self::where('class_id','=',$class_id)->delete();
     }
 }

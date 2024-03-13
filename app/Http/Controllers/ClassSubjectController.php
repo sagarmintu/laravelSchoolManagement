@@ -94,8 +94,8 @@ class ClassSubjectController extends Controller
                     $aasign_subject->save();
                 }
             }
-        } 
-            return redirect('admin/assign_subject/list')->with('success', 'Subject Is Updated Assign To Class');
+        }
+        return redirect('admin/assign_subject/list')->with('success', 'Subject Is Updated Assign To Class');
     }
 
     public function delete($id)
@@ -142,6 +142,5 @@ class ClassSubjectController extends Controller
             $aasign_subject->save();
             return redirect('admin/assign_subject/list')->with('success', 'Subject Is Updated Assign To Class');
         }
-
     }
 }

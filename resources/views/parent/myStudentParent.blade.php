@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Student Details </h1>
+                    <h1>Student Details (Total Record: {{ $getRecord->total() }})</h1>
                 </div>
             </div>
         </div>
@@ -44,6 +44,7 @@
                                         <th>Height</th>
                                         <th>Weight</th>
                                         <th>Created Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -81,12 +82,17 @@
                                         <td>{{ $data->height }}</td>
                                         <td>{{ $data->weight }}</td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
+                                        <td>
+                                            <a href="{{ url('parent/my_student/subject/'.$data->id) }}" class="btn btn-primary btn-sm">Subject List</a>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
 
-
+                            <div style="padding: 10px; float: right;">
+                                {{ $getRecord->links() }}
+                            </div>
 
                         </div>
                     </div>

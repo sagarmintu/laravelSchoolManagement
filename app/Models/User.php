@@ -249,7 +249,7 @@ class User extends Authenticatable
                 ->where('users.parent_id', '=', $parent_id)
                 ->where('users.is_delete', '=', 0)
                 ->orderBy('users.id', 'asc')
-                ->get();
+                ->paginate(5);
 
             return $return;
     }

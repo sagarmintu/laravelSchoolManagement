@@ -228,6 +228,12 @@
               <p>My Account</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('student/my_subject') }}" class="nav-link @if(Request::segment(2) == 'my_subject') active @endif">
+              <i class="nav-icon fas fa-search"></i>
+              <p>My Subject</p>
+            </a>
+          </li>
 
         @elseif(Auth::user()->user_type == 4)
 

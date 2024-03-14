@@ -53,8 +53,8 @@
                         </form>
                     </div>
 
-
                     @include('message')
+                    
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Assign Subject List</h3>

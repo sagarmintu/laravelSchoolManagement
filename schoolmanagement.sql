@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2024 at 12:19 PM
+-- Generation Time: Mar 14, 2024 at 12:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -97,7 +97,7 @@ CREATE TABLE `class_subjects` (
 
 INSERT INTO `class_subjects` (`id`, `class_id`, `subject_id`, `created_by`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
 (11, 2, 2, 1, 0, 1, '2024-03-06 01:53:00', '2024-03-06 01:53:00'),
-(12, 2, 4, 1, 0, 1, '2024-03-06 01:53:00', '2024-03-06 01:53:00'),
+(12, 2, 4, 1, 0, 0, '2024-03-06 01:53:00', '2024-03-06 01:53:00'),
 (13, 2, 1, 1, 0, 1, '2024-03-06 01:53:00', '2024-03-06 03:41:17'),
 (14, 2, 5, 1, 0, 0, '2024-03-06 01:53:00', '2024-03-06 03:39:04'),
 (15, 6, 2, 1, 0, 0, '2024-03-06 01:53:12', '2024-03-06 01:53:12'),
@@ -107,6 +107,34 @@ INSERT INTO `class_subjects` (`id`, `class_id`, `subject_id`, `created_by`, `is_
 (19, 6, 7, 1, 0, 0, '2024-03-12 23:29:45', '2024-03-12 23:29:45'),
 (20, 6, 6, 1, 0, 0, '2024-03-12 23:29:45', '2024-03-12 23:29:45'),
 (21, 6, 8, 1, 0, 0, '2024-03-12 23:29:45', '2024-03-12 23:29:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_subject_timetable`
+--
+
+CREATE TABLE `class_subject_timetable` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `week_id` int(11) DEFAULT NULL,
+  `start_time` varchar(255) DEFAULT NULL,
+  `end_time` varchar(255) DEFAULT NULL,
+  `room_number` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `class_subject_timetable`
+--
+
+INSERT INTO `class_subject_timetable` (`id`, `class_id`, `subject_id`, `week_id`, `start_time`, `end_time`, `room_number`, `created_at`, `updated_at`) VALUES
+(1, 6, 6, 1, '08:00', '10:00', '34', '2024-03-14 05:48:45', '2024-03-14 05:48:45'),
+(2, 6, 6, 2, '02:00', '04:00', '36', '2024-03-14 05:48:45', '2024-03-14 05:48:45'),
+(5, 2, 4, 3, '06:30', '09:00', '12', '2024-03-14 05:53:03', '2024-03-14 05:53:03'),
+(6, 2, 4, 4, '10:00', '11:30', '15', '2024-03-14 05:53:03', '2024-03-14 05:53:03');
 
 -- --------------------------------------------------------
 
@@ -152,7 +180,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2024_03_05_093941_add_is_delete_to_class_table', 6),
 (10, '2024_03_05_110310_create_subjects_table', 7),
 (11, '2024_03_06_034600_create_class_subjects_table', 8),
-(12, '2024_03_13_062931_create_assign_class_teacher_table', 9);
+(12, '2024_03_13_062931_create_assign_class_teacher_table', 9),
+(13, '2024_03_14_071129_create_weeks_table', 10),
+(14, '2024_03_14_110259_create_class_subject_timetable_table', 11);
 
 -- --------------------------------------------------------
 
@@ -263,7 +293,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_picture`, `blood_group`, `height`, `weight`, `occupation`, `address`, `marital_status`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'wcxhvlQd29CMPZIlvy57cXQ8ZjmAJ4bVwnfXqJqjEx3Lsu0DugArZoM4Stm7', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
+(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'bosvspXQUaTxDnhamKcF2w0l2jWUpMTxc4mFr1QtKjutMvsTK4AUXtsppnQL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
 (2, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$pC0eMecp6P/czLiu/RZjUeMlGMQ3IhocM2qvnnyqvGkH6cttX3YfG', 'm3m2Fj9ZWERrdT6y2AtDFlwwh2fJy2GUWD11gBTsY5KgoJnG53UPcF8sE9Tl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 0, '2024-02-29 11:13:57', '2024-03-06 04:15:24'),
 (3, NULL, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
 (4, NULL, 'Parent', NULL, 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
@@ -278,6 +308,32 @@ INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_ver
 (17, NULL, 'Prasant', 'Nayak', 'prasant.nayak123@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Male', '1982-12-15', NULL, NULL, '9874563213', '2022-06-16', 'mupgwjevi1fxb5hmc05h.jpg', NULL, NULL, NULL, NULL, 'Bhubaneswar, Odisha', 'Married', 'odisha', 'B.com (hons.)', '10 Years+', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available', 2, 0, 0, '2024-03-11 22:37:19', '2024-03-12 02:03:38'),
 (18, NULL, 'Pratiskhya', 'Patel', 'pratiskhya.patel10@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Female', '1995-05-27', NULL, NULL, '9874563218', '2015-01-31', 'd6pjr9puzlvrdfxpoejr.jpg', NULL, NULL, NULL, NULL, 'Angul, Odisha', 'Married', 'Bhubaneswar, Odisha', 'B.com (Hons.)', '8 years+', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.testing', 2, 0, 1, '2024-03-11 22:43:56', '2024-03-12 01:03:04'),
 (19, NULL, 'Harmanpet', 'kaur', 'harmanpet.kaur123@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Female', '1991-07-16', NULL, NULL, '9874563217', '2014-07-18', 'g2t89jkznu4hun5sfuha.jpg', NULL, NULL, NULL, NULL, 'Mumbai', 'single', 'Teacher', 'sports', '4yr+', 'testing', 2, 0, 0, '2024-03-12 01:08:37', '2024-03-12 01:08:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `weeks`
+--
+
+CREATE TABLE `weeks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `weeks`
+--
+
+INSERT INTO `weeks` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Monday', '2024-03-14 07:14:41', '2024-03-14 07:14:41'),
+(2, 'Tuesday', '2024-03-14 07:14:50', '2024-03-14 07:14:50'),
+(3, 'Wednesday', '2024-03-14 07:15:00', '2024-03-14 07:15:00'),
+(4, 'Thursday', '2024-03-14 07:15:11', '2024-03-14 07:15:11'),
+(5, 'Friday', '2024-03-14 07:15:20', '2024-03-14 07:15:20'),
+(6, 'Saturday', '2024-03-14 07:14:14', '2024-03-14 07:14:14'),
+(7, 'Sunday', '2024-03-14 07:14:14', '2024-03-14 07:14:14');
 
 --
 -- Indexes for dumped tables
@@ -299,6 +355,12 @@ ALTER TABLE `class`
 -- Indexes for table `class_subjects`
 --
 ALTER TABLE `class_subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `class_subject_timetable`
+--
+ALTER TABLE `class_subject_timetable`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -342,6 +404,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `weeks`
+--
+ALTER TABLE `weeks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -364,6 +432,12 @@ ALTER TABLE `class_subjects`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `class_subject_timetable`
+--
+ALTER TABLE `class_subject_timetable`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -373,7 +447,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -392,6 +466,12 @@ ALTER TABLE `subjects`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `weeks`
+--
+ALTER TABLE `weeks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

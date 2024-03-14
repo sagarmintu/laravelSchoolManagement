@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Class Timetable List (Total Record: )</h1>
+                    <h1>Class Timetable</h1>
                 </div>
                 <div class="col-sm-6">
                     <a href="{{ url('admin/class_timetable/add') }}" class="btn btn-primary btn-sm" style="float: inline-end;"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
@@ -63,42 +63,59 @@
                     @include('message')
 
                     @if(!empty(Request::get('class_id')) && !empty(Request::get('subject_id')))
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Timetable</h3>
-                        </div>
-                        <div class="card-body p-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Week</th>
-                                        <th>Start Time</th>
-                                        <th>End Time</th>
-                                        <th>Room Number</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($week as $value)
-                                    <tr>
-                                        <td>{{ $value['week_name'] }}</td>
-                                        <td>
-                                            <input type="time" name="start_time" class="form-control">
-                                        </td>
-                                        <td>
-                                            <input type="time" name="end_time" class="form-control">
-                                        </td>
-                                        <td>
-                                            <input type="text" style="width: 200px;" name="room_number" class="form-control">
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div style="text-align: right; padding: 20px;">
-                                <button class="btn btn-primary">Submit</button>
+                    <form action="{{ url('admin/class_timetable/add') }}" method="post">
+
+                        {{ csrf_field() }}
+
+                        <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
+                        <input type="hidden" name="subject_id" value="{{ Request::get('subject_id') }}">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Timetable</h3>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Week</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Room Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach($week as $value)
+                                        <tr>
+                                            <td>
+                                                <input type="hidden" name="timetable[{{ $i }}][week_id]" value="{{ $value['week_id'] }}">
+                                                {{ $value['week_name'] }}
+                                            </td>
+                                            <td>
+                                                <input type="time" name="timetable[{{ $i }}][start_time]" class="form-control" value="{{ $value['start_time'] }}">
+                                            </td>
+                                            <td>
+                                                <input type="time" name="timetable[{{ $i }}][end_time]" class="form-control" value="{{ $value['end_time'] }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" style="width: 200px;" name="timetable[{{ $i }}][room_number]" class="form-control" value="{{ $value['room_number'] }}">
+                                            </td>
+                                        </tr>
+                                        @php
+                                            $i++;
+                                        @endphp
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div style="text-align: right; padding: 20px;">
+                                    <button class="btn btn-primary">Submit</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     @endif
 
                 </div>

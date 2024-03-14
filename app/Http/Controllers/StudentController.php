@@ -170,4 +170,10 @@ class StudentController extends Controller
             abort(404);
         }
     }
+
+    public function showStudentList()
+    {
+        $data['getRecord'] = User::getTeacherStudent(Auth::user()->id);
+        return view('teacher.studentList', $data);
+    }
 }

@@ -219,6 +219,12 @@
               <p>Class & Subject</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('teacher/student_list') }}" class="nav-link @if(Request::segment(2) == 'student_list') active @endif">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>Student List</p>
+            </a>
+          </li>
 
         @elseif(Auth::user()->user_type == 3)
 

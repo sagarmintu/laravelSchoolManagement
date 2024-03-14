@@ -213,6 +213,12 @@
               <p>My Account</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('teacher/class_subject') }}" class="nav-link @if(Request::segment(2) == 'class_subject') active @endif">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Class & Subject</p>
+            </a>
+          </li>
 
         @elseif(Auth::user()->user_type == 3)
 

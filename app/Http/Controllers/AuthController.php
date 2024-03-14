@@ -47,7 +47,7 @@ class AuthController extends Controller
             }
             elseif (Auth::user()->user_type == 2) 
             {
-                return redirect('teacher/dashboard')->with('success', 'Welcome To TeacherDashboard');
+                return redirect('teacher/dashboard')->with('success', 'Welcome To Teacher Dashboard');
             }
             elseif (Auth::user()->user_type == 3) 
             {

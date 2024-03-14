@@ -156,29 +156,41 @@
               <p>Parent</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>Class</p>
+
+          <li class="nav-item @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher') menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'class' || Request::segment(2) == 'subject' || Request::segment(2) == 'assign_subject' || Request::segment(2) == 'assign_class_teacher') active @endif">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Academics
+                <i class="fas fa-angle-left right"></i>
+              </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
-              <i class="nav-icon fas fa-th"></i>
-              <p>Subject</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('admin/assign_subject/list') }}" class="nav-link @if(Request::segment(2) == 'assign_subject') active @endif">
-              <i class="nav-icon fas fa-tree"></i>
-              <p>Assign Subject</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('admin/assign_class_teacher/list') }}" class="nav-link @if(Request::segment(2) == 'assign_class_teacher') active @endif">
-              <i class="nav-icon fas fa-file"></i>
-              <p>Assign Class To Teacher</p>
-            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('admin/class/list') }}" class="nav-link @if(Request::segment(2) == 'class') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Class</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/subject/list') }}" class="nav-link @if(Request::segment(2) == 'subject') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Subject</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/assign_subject/list') }}" class="nav-link @if(Request::segment(2) == 'assign_subject') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Assign Subject</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('admin/assign_class_teacher/list') }}" class="nav-link @if(Request::segment(2) == 'assign_class_teacher') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Assign Class To Teacher</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="{{ url('admin/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">

@@ -270,6 +270,12 @@
             <p>My Subject</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ url('student/my_timetable') }}" class="nav-link @if(Request::segment(2) == 'my_timetable') active @endif">
+            <i class="nav-icon fas fa-columns"></i>
+            <p>My Timetable</p>
+          </a>
+        </li>
 
         @elseif(Auth::user()->user_type == 4)
 

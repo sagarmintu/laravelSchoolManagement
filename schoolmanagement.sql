@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2024 at 12:35 PM
+-- Generation Time: Mar 15, 2024 at 07:08 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -134,7 +134,12 @@ INSERT INTO `class_subject_timetable` (`id`, `class_id`, `subject_id`, `week_id`
 (1, 6, 6, 1, '08:00', '10:00', '34', '2024-03-14 05:48:45', '2024-03-14 05:48:45'),
 (2, 6, 6, 2, '02:00', '04:00', '36', '2024-03-14 05:48:45', '2024-03-14 05:48:45'),
 (5, 2, 4, 3, '06:30', '09:00', '12', '2024-03-14 05:53:03', '2024-03-14 05:53:03'),
-(6, 2, 4, 4, '10:00', '11:30', '15', '2024-03-14 05:53:03', '2024-03-14 05:53:03');
+(6, 2, 4, 4, '10:00', '11:30', '15', '2024-03-14 05:53:03', '2024-03-14 05:53:03'),
+(7, 2, 5, 1, '09:30', '11:30', '2', '2024-03-14 22:34:03', '2024-03-14 22:34:03'),
+(8, 2, 5, 2, '09:30', '11:30', '4', '2024-03-14 22:34:03', '2024-03-14 22:34:03'),
+(9, 2, 5, 3, '09:30', '11:30', '6', '2024-03-14 22:34:03', '2024-03-14 22:34:03'),
+(10, 2, 5, 4, '09:30', '11:30', '8', '2024-03-14 22:34:03', '2024-03-14 22:34:03'),
+(11, 2, 5, 5, '11:30', '02:30', '10', '2024-03-14 22:34:03', '2024-03-14 22:34:03');
 
 -- --------------------------------------------------------
 
@@ -293,7 +298,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_picture`, `blood_group`, `height`, `weight`, `occupation`, `address`, `marital_status`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'bosvspXQUaTxDnhamKcF2w0l2jWUpMTxc4mFr1QtKjutMvsTK4AUXtsppnQL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
+(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'pd05q1UlEcERZZ7thgY6jmkf0hygvSH4yrA4tNcqeQZyKBobDUyYue0mf6ZT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
 (2, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$pC0eMecp6P/czLiu/RZjUeMlGMQ3IhocM2qvnnyqvGkH6cttX3YfG', 'm3m2Fj9ZWERrdT6y2AtDFlwwh2fJy2GUWD11gBTsY5KgoJnG53UPcF8sE9Tl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 0, '2024-02-29 11:13:57', '2024-03-06 04:15:24'),
 (3, NULL, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
 (4, NULL, 'Parent', NULL, 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
@@ -302,7 +307,7 @@ INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_ver
 (7, NULL, 'kathiravan  v', NULL, 'kathir@ralecon.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-03-04 00:33:12', '2024-03-04 00:37:19'),
 (12, 15, 'Rutuparna', 'Panda', 'rutuparna.panda123@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, '987123658', '963258916', 6, 'Female', '1999-09-24', 'General', 'Hindu', '9874563217', '2017-11-17', 'dyhogubr9bygaunuubr4.jpg', 'AB+', '5.5', '58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 1, '2024-03-06 22:29:48', '2024-03-12 06:02:18'),
 (13, 16, 'Sanjeeb', 'Das', 'sanjeebdas123@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', 'Boiy1olKhsppkER22HAbxWKstvNB3qQMd3fBKQucdNl55NLyamxyP1mW1lMV', '987123657', '9632587', 2, 'Male', '1994-07-25', 'General', 'Hindu', '9874563210', '2019-02-04', '0fvv5ltg02qwgjr3p6iy.jpg', 'AB+', '6.3', '78', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 1, '2024-03-06 22:32:15', '2024-03-12 06:04:42'),
-(14, 15, 'Prabhudatta', 'Rout', 'prabhudatta.rout123@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, '987123650', '9632582', 2, 'Male', '1995-03-18', 'General', 'Hindu', '9874563210', '2020-07-30', 'xp719ko4mg1gk35uncw6.jpg', 'AB-', '6.3', '75', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-03-07 21:26:58', '2024-03-11 04:24:08'),
+(14, 15, 'Prabhudatta', 'Rout', 'prabhudatta.rout123@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', '1lotiXQ1LfowxKWelQ3mRDthQ12gG2APD2eyk3AGIkUA3aQFCZcJ1vbvWC87', '987123650', '9632582', 2, 'Male', '1995-03-18', 'General', 'Hindu', '9874563210', '2020-07-30', 'xp719ko4mg1gk35uncw6.jpg', 'AB-', '6.3', '75', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-03-07 21:26:58', '2024-03-11 04:24:08'),
 (15, NULL, 'Sanjay', 'Biswal', 'sanjay.biswal76@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', 'wdWYnvgRNasDrs4ufHkRGRwbjXbENROUESs7RKG6m6j9yqgDbUJ54BJiQGpl', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, '6340851327', NULL, 'mujvtprocypthaqxb3cw.jpg', NULL, NULL, NULL, 'Math Professor', 'Vivekanada Shiksha Kendra, cspur , Bhubaneswar, Odisha', NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-03-10 22:39:21', '2024-03-12 05:07:06'),
 (16, NULL, 'Prative', 'Behera', 'prativa.behera97@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Female', NULL, NULL, NULL, '9874563213', NULL, 'xg0yfi8wk01btg4cemgf.jpg', NULL, NULL, NULL, 'Professor', 'Odisha, Bhubaneswar', NULL, NULL, NULL, NULL, NULL, 4, 0, 1, '2024-03-10 22:41:27', '2024-03-10 23:03:06'),
 (17, NULL, 'Prasant', 'Nayak', 'prasant.nayak123@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Male', '1982-12-15', NULL, NULL, '9874563213', '2022-06-16', 'mupgwjevi1fxb5hmc05h.jpg', NULL, NULL, NULL, NULL, 'Bhubaneswar, Odisha', 'Married', 'odisha', 'B.com (hons.)', '10 Years+', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available', 2, 0, 0, '2024-03-11 22:37:19', '2024-03-12 02:03:38'),
@@ -435,7 +440,7 @@ ALTER TABLE `class_subjects`
 -- AUTO_INCREMENT for table `class_subject_timetable`
 --
 ALTER TABLE `class_subject_timetable`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

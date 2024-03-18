@@ -11,9 +11,6 @@
                 <div class="col-sm-6">
                     <h1>Class Timetable</h1>
                 </div>
-                <div class="col-sm-6">
-                    <a href="{{ url('admin/class_timetable/add') }}" class="btn btn-primary btn-sm" style="float: inline-end;"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
-                </div>
             </div>
         </div>
     </section>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
+use App\Models\WeekModel;
 
 class AssignClassTeacherModel extends Model
 {
@@ -89,5 +90,11 @@ class AssignClassTeacherModel extends Model
                     ->paginate(20);
 
         return $return;
+    }
+
+    static public function getTimetable($class_id, $subject_id)
+    {
+        $getWeek = WeekModel::getWeekUsingName(date('l'));
+        return ClassSubjectTimetableModel::getRecordClassTimetable($class_id, $subject_id, $getWeek->id);
     }
 }

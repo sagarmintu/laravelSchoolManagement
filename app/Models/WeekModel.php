@@ -19,4 +19,9 @@ class WeekModel extends Model
     {
         return WeekModel::get();
     }
+
+    static public function getWeekUsingName($weekname)
+    {
+        return WeekModel::where('name','=',$weekname)->first();
+    }
 }

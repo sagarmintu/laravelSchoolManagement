@@ -33,6 +33,7 @@
                                         <th>Class Name</th>
                                         <th>Subject Name</th>
                                         <th>Subject Type</th>
+                                        <th>My Class Timetable</th>
                                         <th>Created Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -48,6 +49,18 @@
                                                 @elseif ($value->subject_type == 'Practical')
                                                 <span class="badge badge-danger">Practical</span>
                                                 @endif
+                                            </td>
+                                            <td>
+                                                @php
+                                                    $classSubject = $value->getTimetable($value->class_id, $value->subject_id);
+                                                @endphp
+
+                                                @if(!empty($classSubject))
+                                                    {{ date('H:i A', strtotime($classSubject->start_time)) }} to {{ date('H:i A', strtotime($classSubject->end_time)) }}
+                                                    <br>
+                                                    Room Number: {{ $classSubject->room_number }}
+                                                @endif
+
                                             </td>
                                             <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                                             <td><a href="{{ url('teacher/class_subject/class_timetable/'.$value->class_id.'/'.$value->subject_id) }}" class="btn btn-primary">Class Timetable</a></td>

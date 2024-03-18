@@ -34,21 +34,23 @@
                                         <th>Subject Name</th>
                                         <th>Subject Type</th>
                                         <th>Created Date</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($getRecord as $data)
+                                    @foreach($getRecord as $value)
                                         <tr>
-                                            <td>{{ $data->class_name }}</td>
-                                            <td>{{ $data->subject_name }}</td>
+                                            <td>{{ $value->class_name }}</td>
+                                            <td>{{ $value->subject_name }}</td>
                                             <td>
-                                                @if ($data->subject_type == 'Theory')
+                                                @if ($value->subject_type == 'Theory')
                                                 <span class="badge badge-success">Theory</span>
-                                                @elseif ($data->subject_type == 'Practical')
+                                                @elseif ($value->subject_type == 'Practical')
                                                 <span class="badge badge-danger">Practical</span>
                                                 @endif
                                             </td>
-                                            <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
+                                            <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
+                                            <td><a href="{{ url('teacher/class_subject/class_timetable/'.$value->class_id.'/'.$value->subject_id) }}" class="btn btn-primary">Class Timetable</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

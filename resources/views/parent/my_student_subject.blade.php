@@ -36,6 +36,7 @@
                                         <th>#</th>
                                         <th>Subject Name</th>
                                         <th>Subject Type</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,6 +45,7 @@
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->subjects_name }}</td>
                                         <td>{{ $data->subjects_type }}</td>
+                                        <td><a href="{{ url('parent/my_student/subject/class_timetable/'.$data->class_id.'/'.$data->subject_id.'/'.$user->id) }}" class="btn btn-primary">Class Timetable</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

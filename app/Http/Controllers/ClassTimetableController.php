@@ -8,6 +8,7 @@ use App\Models\ClassSubjectModel;
 use App\Models\WeekModel;
 use App\Models\ClassSubjectTimetableModel;
 use App\Models\SubjectModel;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ClassTimetableController extends Controller
@@ -149,5 +150,37 @@ class ClassTimetableController extends Controller
 
         $data['getRecord'] = $result;
         return view('teacher.myTimetable', $data);
+    }
+
+    public function showTimetableParent($class_id, $subject_id, $student_id)
+    {
+        $data['getClass'] = ClassModel::getSingle($class_id);
+        $data['getSubject'] = SubjectModel::getSingle($subject_id);
+        $data['getStudent'] = User::getSingle($student_id);
+
+        $getWeek = WeekModel::getRecord();
+        $week = array();
+        foreach ($getWeek as $valueW) 
+        {
+            $dataW = array();
+            $dataW['week_name'] = $valueW->name;
+
+            $classSubject = ClassSubjectTimetableModel::getRecordClassTimetable($class_id, $subject_id, $valueW->id);
+
+            if (!empty($classSubject)) {
+                $dataW['start_time'] = $classSubject->start_time;
+                $dataW['end_time'] = $classSubject->end_time;
+                $dataW['room_number'] = $classSubject->room_number;
+            } else {
+                $dataW['start_time'] = '';
+                $dataW['end_time'] = '';
+                $dataW['room_number'] = '';
+            }
+
+            $result[] = $dataW;
+        }
+
+        $data['getRecord'] = $result;
+        return view('parent.myTimetable', $data);
     }
 }

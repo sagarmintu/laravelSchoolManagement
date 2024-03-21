@@ -43,4 +43,15 @@ class ExamModel extends Model
     {
         return self::findOrFail($id);
     }
+
+    static public function getExam()
+    {
+        $return = self::select('exams.*', 'users.name as created_name')
+                    ->join('users','users.id','=','exams.created_by')
+                    ->where('exams.is_delete', '=', 0)
+                    ->orderBy('exams.name', 'asc')
+                    ->get();
+
+        return $return;
+    }
 }

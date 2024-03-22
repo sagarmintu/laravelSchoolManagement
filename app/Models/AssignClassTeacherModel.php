@@ -97,4 +97,17 @@ class AssignClassTeacherModel extends Model
         $getWeek = WeekModel::getWeekUsingName(date('l'));
         return ClassSubjectTimetableModel::getRecordClassTimetable($class_id, $subject_id, $getWeek->id);
     }
+
+    static public function getMyClassSubjectGroup($teacher_id)
+    {
+        $return = self::select('assign_class_teacher.*', 'class.name as class_name', 'class.id as class_id')
+                    ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+                    ->where('assign_class_teacher.is_delete', '=', 0)
+                    ->where('assign_class_teacher.status', '=', 0)
+                    ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+                    ->groupBy('assign_class_teacher.class_id')
+                    ->get();
+
+        return $return;
+    }
 }

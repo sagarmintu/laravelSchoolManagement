@@ -8,6 +8,7 @@ use App\Models\ExamModel;
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
+use App\Models\AssignClassTeacherModel;
 
 class ExaminationsController extends Controller
 {
@@ -170,5 +171,43 @@ class ExaminationsController extends Controller
         }
         $data['getRecord'] = $result;
         return view('student.exam_timetable', $data);
+    }
+
+    public function examTimetableTeacher()
+    {
+        $result = array();
+        $getclass = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        foreach ($getclass as $class)
+        {
+            $dataC = array();
+            $dataC['class_name'] = $class->class_name;
+            $getExam = ExamScheduleModel::getExam($class->class_id);
+            $examArray = array();
+            foreach($getExam as $exam)
+            {
+                $dataE = array();
+                $dataE['exam_name'] = $exam->exam_name;
+                $getExamTimetable = ExamScheduleModel::getExamTimetable($exam->exam_id, $class->class_id);
+                $subjectArray = array();
+                foreach($getExamTimetable as $valueS)
+                {
+                    $dataS = array();
+                    $dataS['subject_name'] = $valueS->subject_name;
+                    $dataS['exam_date'] = $valueS->exam_date;
+                    $dataS['start_time'] = $valueS->start_time;
+                    $dataS['end_time'] = $valueS->end_time;
+                    $dataS['room_number'] = $valueS->room_number;
+                    $dataS['full_mark'] = $valueS->full_mark;
+                    $dataS['pass_mark'] = $valueS->pass_mark;
+                    $subjectArray[] = $dataS;
+                }
+                $dataE['subject'] = $subjectArray;
+                $examArray[] = $dataE;
+            }
+            $dataC['exam'] = $examArray;
+            $result[] = $dataC;
+        }
+        $data['getRecord'] = $result;
+        return view('teacher.exam_timetable', $data);
     }
 }

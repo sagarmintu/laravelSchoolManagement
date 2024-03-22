@@ -38,7 +38,7 @@ class ExamScheduleModel extends Model
         return ExamScheduleModel::select('exam_schedules.*','exams.name as exam_name')
                     ->join('exams', 'exams.id', '=', 'exam_schedules.exam_id')
                     ->where('exam_schedules.class_id', '=', $class_id)
-                    ->groupBy('exam_id')
+                    ->groupBy('exam_schedules.exam_id')
                     ->orderBy('exam_schedules.id', 'asc')
                     ->get();
     }

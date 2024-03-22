@@ -82,8 +82,10 @@
                                         <td>{{ $data->height }}</td>
                                         <td>{{ $data->weight }}</td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($data->created_at)) }}</td>
-                                        <td>
-                                            <a href="{{ url('parent/my_student/subject/'.$data->id) }}" class="btn btn-primary btn-sm">Subject List</a>
+                                        <td style="width: 400px;">
+                                            <a href="{{ url('parent/my_student/subject/'.$data->id) }}" class="btn btn-success btn-sm">Subject List</a>
+
+                                            <a href="{{ url('parent/my_student/exam_timetable/'.$data->id) }}" class="btn btn-info btn-sm">Exam Timetable</a>
                                         </td>
                                     </tr>
                                     @endforeach

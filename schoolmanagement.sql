@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2024 at 07:50 AM
+-- Generation Time: Mar 21, 2024 at 12:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -150,6 +150,65 @@ INSERT INTO `class_subject_timetable` (`id`, `class_id`, `subject_id`, `week_id`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `exams`
+--
+
+CREATE TABLE `exams` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `note` varchar(255) NOT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `is_delete` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=not, 1=yes',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exams`
+--
+
+INSERT INTO `exams` (`id`, `name`, `note`, `created_by`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 'FIRST TERM 2023/2024', 'testing 1', 1, 0, '2024-03-20 22:53:32', '2024-03-20 23:18:10'),
+(2, 'FIRST TERM 2024/2025', 'testing 2', 1, 0, '2024-03-20 22:53:56', '2024-03-20 23:18:27'),
+(3, 'FIRST TERM 2025/2026', 'testing 3', 1, 0, '2024-03-20 23:19:06', '2024-03-20 23:19:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_schedules`
+--
+
+CREATE TABLE `exam_schedules` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `exam_id` int(11) DEFAULT NULL,
+  `class_id` int(11) DEFAULT NULL,
+  `subject_id` int(11) DEFAULT NULL,
+  `exam_date` date DEFAULT NULL,
+  `start_time` varchar(255) DEFAULT NULL,
+  `end_time` varchar(255) DEFAULT NULL,
+  `room_number` varchar(255) DEFAULT NULL,
+  `full_mark` varchar(255) DEFAULT NULL,
+  `pass_mark` varchar(255) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exam_schedules`
+--
+
+INSERT INTO `exam_schedules` (`id`, `exam_id`, `class_id`, `subject_id`, `exam_date`, `start_time`, `end_time`, `room_number`, `full_mark`, `pass_mark`, `created_by`, `created_at`, `updated_at`) VALUES
+(3, 1, 6, 2, '2024-03-21', '12:07', '13:07', '24', '100', '56', 1, '2024-03-21 01:08:10', '2024-03-21 01:08:10'),
+(4, 1, 6, 4, '2024-03-22', '13:08', '14:08', '25', '100', '67', 1, '2024-03-21 01:08:10', '2024-03-21 01:08:10'),
+(5, 1, 6, 1, '2024-03-23', '16:00', '18:00', '26', '100', '45', 1, '2024-03-21 01:08:10', '2024-03-21 01:08:10'),
+(12, 1, 2, 4, '2024-03-21', '12:30', '14:30', '58', '100', '55', 1, '2024-03-21 01:15:09', '2024-03-21 01:15:09'),
+(13, 1, 2, 5, '2024-03-22', '10:00', '11:00', '36', '100', '75', 1, '2024-03-21 01:15:09', '2024-03-21 01:15:09'),
+(15, 1, 7, 9, '2024-03-26', '13:00', '14:30', '15', '100', '51', 1, '2024-03-21 01:16:34', '2024-03-21 01:16:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -193,7 +252,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2024_03_06_034600_create_class_subjects_table', 8),
 (12, '2024_03_13_062931_create_assign_class_teacher_table', 9),
 (13, '2024_03_14_071129_create_weeks_table', 10),
-(14, '2024_03_14_110259_create_class_subject_timetable_table', 11);
+(14, '2024_03_14_110259_create_class_subject_timetable_table', 11),
+(15, '2024_03_21_034839_create_exams_table', 12),
+(16, '2024_03_21_060233_create_exam_schedules_table', 13);
 
 -- --------------------------------------------------------
 
@@ -305,7 +366,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_picture`, `blood_group`, `height`, `weight`, `occupation`, `address`, `marital_status`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'Csn6ozmFOqxRcDXU8CiJhWf19sgMQY5uaxUOT0LRonIsXQdXSrYq4iPCCJbx', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
+(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'qCMYphuS9Ds7FKH1qiwG14jkpRVtxmeBfqaHFe4YqY5y6qwzOfHvxyFyNxYz', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
 (2, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$pC0eMecp6P/czLiu/RZjUeMlGMQ3IhocM2qvnnyqvGkH6cttX3YfG', 'm3m2Fj9ZWERrdT6y2AtDFlwwh2fJy2GUWD11gBTsY5KgoJnG53UPcF8sE9Tl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 0, '2024-02-29 11:13:57', '2024-03-06 04:15:24'),
 (3, NULL, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
 (4, NULL, 'Parent', NULL, 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
@@ -373,6 +434,18 @@ ALTER TABLE `class_subjects`
 -- Indexes for table `class_subject_timetable`
 --
 ALTER TABLE `class_subject_timetable`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exams`
+--
+ALTER TABLE `exams`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_schedules`
+--
+ALTER TABLE `exam_schedules`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -450,6 +523,18 @@ ALTER TABLE `class_subject_timetable`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `exams`
+--
+ALTER TABLE `exams`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `exam_schedules`
+--
+ALTER TABLE `exam_schedules`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -459,7 +544,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\WeekModel;
 use App\Models\ClassSubjectTimetableModel;
 use App\Models\ExamScheduleModel;
+use App\Models\User;
 
 class CalendarController extends Controller
 {
@@ -73,5 +74,14 @@ class CalendarController extends Controller
             $result[] = $dataS;
         }
         return $result;
+    }
+
+    public function myCalendarParent($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+        $data['getMyTimetable'] = $this->getTimetable($getStudent->class_id);
+        $data['getExamTimetable'] = $this->getExamTimetable($getStudent->class_id);
+        $data['getStudent'] = $getStudent;
+        return view("parent.calender", $data);
     }
 }

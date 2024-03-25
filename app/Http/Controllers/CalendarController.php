@@ -7,13 +7,49 @@ use App\Models\ClassSubjectModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WeekModel;
 use App\Models\ClassSubjectTimetableModel;
+use App\Models\ExamScheduleModel;
 
 class CalendarController extends Controller
 {
     public function calendar()
     {
+        $data['getMyTimetable'] = $this->getTimetable(Auth::user()->class_id);
+        $data['getExamTimetable'] = $this->getExamTimetable(Auth::user()->class_id);
+        return view("student.calender", $data);
+    }
+
+    public function getExamTimetable($class_id)
+    {
+        $getExam = ExamScheduleModel::getExam($class_id);
         $result = array();
-        $getRecord = ClassSubjectModel::mySubject(Auth::user()->class_id);
+        foreach($getExam as $value)
+        {
+            $dataE = array();
+            $dataE['name'] = $value->exam_name;
+            $getExamTimetable = ExamScheduleModel::getExamTimetable($value->exam_id, $class_id);
+            $resultS = array();
+            foreach($getExamTimetable as $valueS)
+            {
+                $dataS = array();
+                $dataS['subject_name'] = $valueS->subject_name;
+                $dataS['exam_date'] = $valueS->exam_date;
+                $dataS['start_time'] = $valueS->start_time;
+                $dataS['end_time'] = $valueS->end_time;
+                $dataS['room_number'] = $valueS->room_number;
+                $dataS['full_mark'] = $valueS->full_mark;
+                $dataS['pass_mark'] = $valueS->pass_mark;
+                $resultS[] = $dataS;
+            }
+            $dataE['exam'] = $resultS;
+            $result[] = $dataE;
+        }
+        return $result;
+    }
+
+    public function getTimetable($class_id)
+    {
+        $result = array();
+        $getRecord = ClassSubjectModel::mySubject($class_id);
         foreach ($getRecord as $value) {
             $dataS['name'] = $value->subjects_name;
             $getWeek = WeekModel::getRecord();
@@ -33,12 +69,9 @@ class CalendarController extends Controller
                     $week[] = $dataW;
                 }
             }
-
             $dataS['week'] = $week;
             $result[] = $dataS;
         }
-        
-        $data['getMyTimetable'] = $result;
-        return view("student.calender", $data);
+        return $result;
     }
 }

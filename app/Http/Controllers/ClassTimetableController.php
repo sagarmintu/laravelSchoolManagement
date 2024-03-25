@@ -116,6 +116,7 @@ class ClassTimetableController extends Controller
             $dataS['week'] = $week;
             $result[] = $dataS;
         }
+
         $data['getRecord'] = $result;
         return view('student.myTimetable', $data);
     }

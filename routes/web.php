@@ -14,6 +14,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\ClassTimetableController;
 use App\Http\Controllers\ExaminationsController;
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +134,7 @@ Route::group(['middleware' => 'student'], function() {
     Route::get('student/my_subject', [SubjectController::class, 'mySubject']);
     Route::get('student/my_timetable', [ClassTimetableController::class, 'myTimetable']);
     Route::get('student/exam_timetable', [ExaminationsController::class, 'examTimetable']);
+    Route::get('student/calendar', [CalendarController::class, 'calendar']);
 });
 
 Route::group(['middleware' => 'teacher'], function() {

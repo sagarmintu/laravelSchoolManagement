@@ -49,10 +49,21 @@
 
     @foreach($getClassTimetable as $value)
         events.push({
-            title: '{{ $value->class_name }} - {{ $value->subject_name }}',
+            title: 'Class : {{ $value->class_name }} - {{ $value->subject_name }}',
             daysOfWeek: [ {{ $value->fullcalender_day }} ],
             startTime: '{{ $value->start_time }}',
             endTime: '{{ $value->end_time }}',
+        });
+    @endforeach
+
+    @foreach($getExamTimetable as $exam)
+        events.push({
+            event_id: 1,
+            title: 'Exam : {{ $exam->class_name }} - {{ $exam->exam_name }} - {{ $exam->subject_name }} ( {{ date('h:i A',strtotime($exam->start_time)) }} to {{ date('h:i A',strtotime($exam->end_time)) }} ) ',
+            start: '{{ $exam->exam_date }}',
+            end: '{{ $exam->exam_date }}',
+            color: 'red',
+            url: '{{ url('teacher/exam_timetable') }}',
         });
     @endforeach
 

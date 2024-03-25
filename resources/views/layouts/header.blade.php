@@ -271,6 +271,12 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ url('teacher/calendar') }}" class="nav-link @if(Request::segment(2) == 'calendar') active @endif">
+            <i class="nav-icon fas fa-search"></i>
+            <p>Calender</p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ url('teacher/student_list') }}" class="nav-link @if(Request::segment(2) == 'student_list') active @endif">
             <i class="nav-icon fas fa-copy"></i>
             <p>Student List</p>

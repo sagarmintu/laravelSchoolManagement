@@ -11,6 +11,9 @@
                 <div class="col-sm-6">
                     <h1>My Timetable ({{ $getClass->name }} - {{ $getSubject->name }})</h1>
                 </div>
+                <div class="col-sm-6">
+                    <a href="{{ url('teacher/class_subject') }}" class="btn btn-primary btn-sm" style="float: inline-end;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                </div>
             </div>
         </div>
     </section>

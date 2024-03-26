@@ -243,4 +243,16 @@ class ExaminationsController extends Controller
         $data['getStudent'] = $getStudent;
         return view('parent.exam_timetable', $data);
     }
+
+    public function mark_register(Request $request)
+    {
+        $data['getClass'] = ClassModel::getClass();
+        $data['getExam'] = ExamModel::getExam();
+        if(!empty($request->get('exam_id')) && !empty($request->get('class_id')))
+        {
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+        return view('admin.examinations.mark_register', $data);
+    }
 }

@@ -199,8 +199,8 @@
           </ul>
         </li>
 
-        <li class="nav-item @if(Request::segment(2) == 'examinations') menu-open @endif">
-          <a href="#" class="nav-link @if(Request::segment(2) == 'examinations') active @endif">
+        <li class="nav-item @if(Request::segment(2) == 'examinations' || Request::segment(2) == 'mark_register') menu-open @endif">
+          <a href="#" class="nav-link @if(Request::segment(2) == 'examinations' || Request::segment(2) == 'mark_register') active @endif">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Examinations
@@ -220,6 +220,14 @@
               <a href="{{ url('admin/examinations/exam_schedule') }}" class="nav-link @if(Request::segment(3) == 'exam_schedule') active @endif">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Exam Schedule</p>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ url('admin/examinations/mark_register') }}" class="nav-link @if(Request::segment(3) == 'mark_register') active @endif">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Mark Register</p>
               </a>
             </li>
           </ul>

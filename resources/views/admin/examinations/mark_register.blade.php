@@ -70,7 +70,7 @@
                                         <th>Student Name</th>
                                         @foreach($getSubject as $subject)
                                         <th>
-                                            {{ $subject->subject_name }}  <br>
+                                            {{ $subject->subject_name }} <br>
                                             ({{ $subject->subject_type }} : {{ $subject->full_mark }} / {{ $subject->pass_mark }})
                                         </th>
                                         @endforeach
@@ -79,34 +79,52 @@
                                 </thead>
                                 <tbody>
                                     @if(!empty($getStudent) && !empty($getStudent->count()))
-                                        @foreach($getStudent as $student)
+                                    @foreach($getStudent as $student)
+                                        <form method="post" class="submitForm">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="student_id" value="{{ $student->id }}">
+                                            <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
+                                            <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
                                             <tr>
                                                 <td>{{ $student->user_name }} {{ $student->user_lastname }}</td>
+                                                @php
+                                                    $i = 1;
+                                                @endphp
+
                                                 @foreach($getSubject as $subject)
-                                                <td>
-                                                    <div style="margin-bottom: 10px;">
-                                                        Class Work :
-                                                        <input type="text" style="width: 200px;" name="" class="form-control" placeholder="Enter Marks">
-                                                    </div>
-                                                    <div style="margin-bottom: 10px;">
-                                                        Home Work :
-                                                        <input type="text" style="width: 200px;" name="" class="form-control" placeholder="Enter Marks">
-                                                    </div>
-                                                    <div style="margin-bottom: 10px;">
-                                                        Test Work :
-                                                        <input type="text" style="width: 200px;" name="" class="form-control" placeholder="Enter Marks">
-                                                    </div>
-                                                    <div style="margin-bottom: 10px;">
-                                                        Exam :
-                                                        <input type="text" style="width: 200px;" name="" class="form-control" placeholder="Enter Marks">
-                                                    </div>
-                                                </td>
+
+                                                @php
+                                                    $getMark = $subject->getMark($student->id, Request::get('exam_id'), Request::get('class_id'), $subject->subject_id);
+                                                @endphp
+                                                    <td>
+                                                        <div style="margin-bottom: 10px;">
+                                                            Class Work :
+                                                            <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][class_work]" class="form-control" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter Marks">
+                                                        </div>
+                                                        <div style="margin-bottom: 10px;">
+                                                            Home Work :
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][home_work]" class="form-control" value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}" placeholder="Enter Marks">
+                                                        </div>
+                                                        <div style="margin-bottom: 10px;">
+                                                            Test Work :
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][test_work]" class="form-control" value="{{ !empty($getMark->test_work) ? $getMark->test_work : '' }}" placeholder="Enter Marks">
+                                                        </div>
+                                                        <div style="margin-bottom: 10px;">
+                                                            Exam :
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][exam]" class="form-control" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter Marks">
+                                                        </div>
+                                                    </td>
+                                                @php
+                                                    $i++;
+                                                @endphp
                                                 @endforeach
                                                 <td>
-                                                    <button type="button" class="btn btn-success">Save</button>
+                                                    <button type="submit" class="btn btn-success">Save</button>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        </form>
+                                    @endforeach
                                     @endif
                                 </tbody>
                             </table>
@@ -119,5 +137,25 @@
         </div>
     </section>
 </div>
+
+@endsection
+
+@section('script')
+
+    <script>
+        $('.submitForm').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "{{ url('admin/examinations/submit_mark_register') }}",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(data)
+                {
+                    alert(data.message);
+                }
+            });
+        });
+    </script>
 
 @endsection

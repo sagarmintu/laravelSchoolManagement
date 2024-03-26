@@ -10,6 +10,7 @@ use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use App\Models\AssignClassTeacherModel;
 use App\Models\User;
+use App\Models\MarkRegisterModel;
 
 class ExaminationsController extends Controller
 {
@@ -254,5 +255,43 @@ class ExaminationsController extends Controller
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
         }
         return view('admin.examinations.mark_register', $data);
+    }
+
+    public function submit_mark_register(Request $request)
+    {
+        if(!empty($request->mark))
+        {
+            foreach($request->mark as $mark)
+            {
+                $class_work = !empty($mark['class_work']) ? $mark['class_work'] : 0;
+                $home_work = !empty($mark['home_work']) ? $mark['home_work'] : 0;
+                $test_work = !empty($mark['test_work']) ? $mark['test_work'] : 0;
+                $exam = !empty($mark['exam']) ? $mark['exam'] : 0;
+
+                $getMark = MarkRegisterModel::checkAlreadyMark($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
+
+                if(!empty($getMark))
+                {
+                    $save = $getMark;
+                }
+                else
+                {
+                    $save                 = new MarkRegisterModel;
+                    $save->created_by =  Auth::user()->id;
+                }
+                $save->student_id = $request->student_id;
+                $save->exam_id = $request->exam_id;
+                $save->class_id = $request->class_id;
+                $save->subject_id = $mark['subject_id'];
+                $save->class_work = $class_work;
+                $save->home_work = $home_work;
+                $save->test_work = $test_work;
+                $save->exam = $exam;
+
+                $save->save();
+            }
+        }
+        $json['message'] = "Mark Is Registered Successfully";
+        echo json_encode($json);
     }
 }

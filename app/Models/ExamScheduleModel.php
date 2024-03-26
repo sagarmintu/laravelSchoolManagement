@@ -66,9 +66,14 @@ class ExamScheduleModel extends Model
     static public function getSubject($exam_id,$class_id)
     {
         return ExamScheduleModel::select('exam_schedules.*', 'subjects.name as subject_name', 'subjects.type as subject_type')
-                    ->join('subjects', 'subjects.id', '=', 'exam_schedules.subject_id')
-                    ->where('exam_schedules.exam_id', '=', $exam_id)
-                    ->where('exam_schedules.class_id', '=', $class_id)
-                    ->get();
+                ->join('subjects', 'subjects.id', '=', 'exam_schedules.subject_id')
+                ->where('exam_schedules.exam_id', '=', $exam_id)
+                ->where('exam_schedules.class_id', '=', $class_id)
+                ->get();
+    }
+
+    static public function getMark($student_id, $exam_id, $class_id, $subject_id)
+    {
+        return MarkRegisterModel::checkAlreadyMark($student_id, $exam_id, $class_id, $subject_id);
     }
 }

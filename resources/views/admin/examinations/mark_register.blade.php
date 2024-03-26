@@ -100,20 +100,26 @@
                                                         <div style="margin-bottom: 10px;">
                                                             Class Work :
                                                             <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
-                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][class_work]" class="form-control" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter Marks">
+
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][class_work]" class="form-control" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter Marks">
                                                         </div>
                                                         <div style="margin-bottom: 10px;">
                                                             Home Work :
-                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][home_work]" class="form-control" value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}" placeholder="Enter Marks">
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][home_work]" class="form-control" id="home_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->home_work) ? $getMark->home_work : '' }}" placeholder="Enter Marks">
                                                         </div>
                                                         <div style="margin-bottom: 10px;">
                                                             Test Work :
-                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][test_work]" class="form-control" value="{{ !empty($getMark->test_work) ? $getMark->test_work : '' }}" placeholder="Enter Marks">
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][test_work]" class="form-control" id="test_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->test_work) ? $getMark->test_work : '' }}" placeholder="Enter Marks">
                                                         </div>
                                                         <div style="margin-bottom: 10px;">
                                                             Exam :
-                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][exam]" class="form-control" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter Marks">
+                                                            <input type="text" style="width: 200px;" name="mark[{{ $i }}][exam]" class="form-control" id="exam_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->exam) ? $getMark->exam : '' }}" placeholder="Enter Marks">
                                                         </div>
+
+                                                        <div style="margin-bottom: 10px;">
+                                                            <button type="button" class="btn btn-primary saveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">Save</button>
+                                                        </div>
+
                                                     </td>
                                                 @php
                                                     $i++;
@@ -156,6 +162,40 @@
                 }
             });
         });
+
+        $('.saveSingleSubject').click(function(e){
+            var student_id = $(this).attr('id');
+            var subject_id = $(this).attr('data-val');
+            var exam_id = $(this).attr('data-exam');
+            var class_id = $(this).attr('data-class');
+            var class_work = $('#class_work_'+student_id+subject_id).val();
+            var home_work = $('#home_work_'+student_id+subject_id).val();
+            var test_work = $('#test_work_'+student_id+subject_id).val();
+            var exam = $('#exam_'+student_id+subject_id).val();
+
+            $.ajax({
+                type: "post",
+                url: "{{ url('admin/examinations/single_submit_mark_register') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    student_id : student_id,
+                    subject_id : subject_id,
+                    exam_id : exam_id,
+                    class_id : class_id,
+                    class_work : class_work,
+                    home_work : home_work,
+                    test_work : test_work,
+                    exam : exam,
+
+                },
+                dataType: "json",
+                success: function(data)
+                {
+                    alert(data.message);
+                }
+            });
+        });
+
     </script>
 
 @endsection

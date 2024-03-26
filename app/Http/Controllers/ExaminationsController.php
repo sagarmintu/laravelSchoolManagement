@@ -294,4 +294,36 @@ class ExaminationsController extends Controller
         $json['message'] = "Mark Is Registered Successfully";
         echo json_encode($json);
     }
+
+    public function single_submit_mark_register(Request $request)
+    {
+        $class_work = !empty($request->class_work) ? $request->class_work : 0;
+        $home_work = !empty($request->home_work) ? $request->home_work : 0;
+        $test_work = !empty($request->test_work) ? $request->test_work : 0;
+        $exam = !empty($request->exam) ? $request->exam : 0;
+
+        $getMark = MarkRegisterModel::checkAlreadyMark($request->student_id, $request->exam_id, $request->class_id, $request->subject_id);
+
+        if(!empty($getMark))
+        {
+            $save = $getMark;
+        }
+        else
+        {
+            $save                 = new MarkRegisterModel;
+            $save->created_by =  Auth::user()->id;
+        }
+        $save->student_id = $request->student_id;
+        $save->exam_id = $request->exam_id;
+        $save->class_id = $request->class_id;
+        $save->subject_id = $request->subject_id;
+        $save->class_work = $class_work;
+        $save->home_work = $home_work;
+        $save->test_work = $test_work;
+        $save->exam = $exam;
+        $save->save();
+        
+        $json['message'] = "Mark Is Registered Successfully";
+        echo json_encode($json);
+    }
 }

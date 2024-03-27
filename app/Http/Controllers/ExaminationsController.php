@@ -337,4 +337,15 @@ class ExaminationsController extends Controller
         }
         echo json_encode($json);
     }
+
+    public function mark_register_teacher(Request $request)
+    {
+        $data['getclass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        $data['getExam'] = ExamScheduleModel::getExamTeacher(Auth::user()->id);
+        if (!empty($request->get('exam_id')) && !empty($request->get('class_id'))) {
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+        return view('teacher.mark_register', $data);
+    }
 }

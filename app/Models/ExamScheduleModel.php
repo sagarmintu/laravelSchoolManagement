@@ -81,4 +81,15 @@ class ExamScheduleModel extends Model
     {
         return self::findOrFail($id);
     }
+
+    static public function getExamTeacher($teacher_id)
+    {
+        return ExamScheduleModel::select('exam_schedules.*','exams.name as exam_name')
+                    ->join('exams', 'exams.id', '=', 'exam_schedules.exam_id')
+                    ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'exam_schedules.class_id')
+                    ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+                    ->groupBy('exam_schedules.exam_id')
+                    ->orderBy('exam_schedules.id', 'asc')
+                    ->get();
+    }
 }

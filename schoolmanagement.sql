@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 12:57 PM
+-- Generation Time: Mar 27, 2024 at 12:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -250,13 +250,10 @@ CREATE TABLE `mark_register` (
 --
 
 INSERT INTO `mark_register` (`id`, `student_id`, `exam_id`, `class_id`, `subject_id`, `class_work`, `home_work`, `test_work`, `exam`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 13, 1, 2, 4, '26', '24', '25', '23', 1, '2024-03-26 05:42:17', '2024-03-26 06:25:36'),
-(2, 13, 1, 2, 5, '14', '15', '12', '10', 1, '2024-03-26 05:42:17', '2024-03-26 05:42:35'),
-(3, 14, 1, 2, 4, '5', '12', '24', '19', 1, '2024-03-26 05:42:56', '2024-03-26 05:42:56'),
-(4, 14, 1, 2, 5, '34', '15', '12', '10', 1, '2024-03-26 05:42:56', '2024-03-26 05:42:56'),
-(5, 12, 1, 6, 2, '23', '34', '12', '29', 1, '2024-03-26 05:43:26', '2024-03-26 05:43:26'),
-(6, 12, 1, 6, 4, '34', '15', '12', '31', 1, '2024-03-26 05:43:26', '2024-03-26 05:43:26'),
-(7, 12, 1, 6, 1, '25', '37', '41', '44', 1, '2024-03-26 05:43:26', '2024-03-26 05:43:26');
+(1, 13, 1, 2, 4, '20', '10', '5', '18', 19, '2024-03-27 06:18:16', '2024-03-27 06:18:39'),
+(2, 13, 1, 2, 5, '29', '31', '11', '28', 19, '2024-03-27 06:19:01', '2024-03-27 06:19:01'),
+(3, 14, 1, 2, 4, '15', '13', '11', '22', 19, '2024-03-27 06:20:29', '2024-03-27 06:20:29'),
+(4, 14, 1, 2, 5, '34', '33', '12', '10', 19, '2024-03-27 06:20:56', '2024-03-27 06:21:25');
 
 -- --------------------------------------------------------
 
@@ -403,7 +400,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_verified_at`, `password`, `remember_token`, `admission_number`, `roll_number`, `class_id`, `gender`, `date_of_birth`, `caste`, `religion`, `mobile_number`, `admission_date`, `profile_picture`, `blood_group`, `height`, `weight`, `occupation`, `address`, `marital_status`, `permanent_address`, `qualification`, `work_experience`, `note`, `user_type`, `is_delete`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'Vete2ZU25M5CvxuCCNYi4JDJQA1im0PBumOWEC6LKrvPFs7zHUD9h7aUHwLv', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
+(1, NULL, 'Admin', NULL, 'admin@gmail.com', NULL, '$2y$10$Es7odPG7xoX73G3GBHaaUOOsG8gVWRB8VeUKevgs8oLeCgHR1MCDC', 'buAYguC798LqgIkSz0sYC6v3My2iKtA3Qqtjs8uG0QEgRgbM2jz3wqv4hSbg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, '2024-02-28 11:13:57', '2024-03-12 05:19:56'),
 (2, NULL, 'Teacher', NULL, 'teacher@gmail.com', NULL, '$2y$10$pC0eMecp6P/czLiu/RZjUeMlGMQ3IhocM2qvnnyqvGkH6cttX3YfG', 'm3m2Fj9ZWERrdT6y2AtDFlwwh2fJy2GUWD11gBTsY5KgoJnG53UPcF8sE9Tl', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 0, 0, '2024-02-29 11:13:57', '2024-03-06 04:15:24'),
 (3, NULL, 'Student', NULL, 'student@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'Tu7kPpbZH32vJrlYXTnh0HvVKt8LoUThyiuLK63vMQlGzfp0bStlfikW5cgU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
 (4, NULL, 'Parent', NULL, 'parent@gmail.com', NULL, '$2y$10$XoXmGJ7YTQuGGqRaVPTHPe4tr3NTb3Nnu3i.sqCZGYzkfvdRwcf22', 'HonpyUPSwORP7epDyrXThFF8vutBW7XEfNLQ7qb0iIs73bl0lSt6znV8kQLi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-02-29 11:13:57', '2024-02-29 11:13:57'),
@@ -417,7 +414,7 @@ INSERT INTO `users` (`id`, `parent_id`, `name`, `last_name`, `email`, `email_ver
 (16, NULL, 'Prative', 'Behera', 'prativa.behera98@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Female', NULL, NULL, NULL, '9874563213', NULL, 'xg0yfi8wk01btg4cemgf.jpg', NULL, NULL, NULL, 'Professor', 'Odisha, Bhubaneswar', NULL, NULL, NULL, NULL, NULL, 4, 0, 0, '2024-03-10 22:41:27', '2024-03-22 01:27:04'),
 (17, NULL, 'Prasant', 'Nayak', 'prasant.nayak123@gmail.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', NULL, NULL, NULL, NULL, 'Male', '1982-12-15', NULL, NULL, '9874563213', '2022-06-16', 'mupgwjevi1fxb5hmc05h.jpg', NULL, NULL, NULL, NULL, 'Bhubaneswar, Odisha', 'Married', 'odisha', 'B.com (hons.)', '10 Years+', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available', 2, 0, 0, '2024-03-11 22:37:19', '2024-03-12 02:03:38'),
 (18, NULL, 'Pratiskhya', 'Patel', 'pratiskhya.patel10@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', 'zpHdsqUZknz1cBJQe4MkHRDj4rZx3ndREtmL7Y7IkhS6LhUeHi9jD00Ft0zo', NULL, NULL, NULL, 'Female', '1995-05-27', NULL, NULL, '9874563218', '2015-01-31', 'd6pjr9puzlvrdfxpoejr.jpg', NULL, NULL, NULL, NULL, 'Angul, Odisha', 'Married', 'Bhubaneswar, Odisha', 'B.com (Hons.)', '8 years+', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.testing', 2, 0, 1, '2024-03-11 22:43:56', '2024-03-12 01:03:04'),
-(19, NULL, 'Harmanpet', 'kaur', 'harmanpet.kaur123@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', 'gEPOHNVjfqUExukI67lep8m11W3nAk9Ly108J1FDAPkCzVuVvRuDRhYbKXsl', NULL, NULL, NULL, 'Female', '1991-07-16', NULL, NULL, '9874563217', '2014-07-18', 'g2t89jkznu4hun5sfuha.jpg', NULL, NULL, NULL, NULL, 'Mumbai', 'single', 'Teacher', 'sports', '4yr+', 'testing', 2, 0, 0, '2024-03-12 01:08:37', '2024-03-12 01:08:48');
+(19, NULL, 'Harmanpet', 'kaur', 'harmanpet.kaur123@yahoo.com', NULL, '$2y$10$NbY2EdfOddbEjMyfgATNoe42Lgj2rSOM7EUeJwEQO/K/MVJfffFpC', 'MCUWsX8dZgDbXKMP9uTBoD6CE9NDaZVcOYknb3SEW3Wl8kufGbBve72wfgfz', NULL, NULL, NULL, 'Female', '1991-07-16', NULL, NULL, '9874563217', '2014-07-18', 'g2t89jkznu4hun5sfuha.jpg', NULL, NULL, NULL, NULL, 'Mumbai', 'single', 'Teacher', 'sports', '4yr+', 'testing', 2, 0, 0, '2024-03-12 01:08:37', '2024-03-12 01:08:48');
 
 -- --------------------------------------------------------
 
@@ -588,7 +585,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `mark_register`
 --
 ALTER TABLE `mark_register`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`

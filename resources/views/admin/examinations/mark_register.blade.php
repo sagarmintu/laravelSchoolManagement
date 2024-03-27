@@ -89,16 +89,34 @@
                                                 <td>{{ $student->user_name }} {{ $student->user_lastname }}</td>
                                                 @php
                                                     $i = 1;
+                                                    $totalStudentMark = 0;
+                                                    $totalFullMark = 0;
+                                                    $totalPassMark = 0;
+                                                    $pass_fail_validation = 0;
                                                 @endphp
 
                                                 @foreach($getSubject as $subject)
 
                                                 @php
+                                                    $totalMark = 0;
+                                                    $totalFullMark = $totalFullMark + $subject->full_mark;
+                                                    $totalPassMark = $totalPassMark + $subject->pass_mark;
                                                     $getMark = $subject->getMark($student->id, Request::get('exam_id'), Request::get('class_id'), $subject->subject_id);
+
+                                                    if(!empty($getMark))
+                                                    {
+                                                        $totalMark = $getMark->class_work + $getMark->home_work + $getMark->test_work + $getMark->exam;
+                                                    }
+
+                                                    $totalStudentMark = $totalStudentMark + $totalMark;
+
                                                 @endphp
+
                                                     <td>
                                                         <div style="margin-bottom: 10px;">
                                                             Class Work :
+                                                            <input type="hidden" name="mark[{{ $i }}][id]" value="{{ $subject->id }}">
+
                                                             <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
 
                                                             <input type="text" style="width: 200px;" name="mark[{{ $i }}][class_work]" class="form-control" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter Marks">
@@ -117,8 +135,26 @@
                                                         </div>
 
                                                         <div style="margin-bottom: 10px;">
-                                                            <button type="button" class="btn btn-primary saveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}">Save</button>
+                                                            <button type="button" class="btn btn-primary saveSingleSubject" id="{{ $student->id }}" data-val="{{ $subject->subject_id }}" data-exam="{{ Request::get('exam_id') }}" data-class="{{ Request::get('class_id') }}" data-schedule="{{ $subject->id }}">Save</button>
                                                         </div>
+
+                                                        @if(!empty($getMark))
+                                                        <div style="margin-bottom: 10px;">
+                                                            <b>Total Mark :</b> {{ $totalMark }}
+                                                            <br>
+                                                            <b>Pass Mark :</b> {{ $subject->pass_mark }}
+                                                            <br>
+                                                            @if($totalMark >= $subject->pass_mark)
+                                                                <b>Result :</b> <span style="color: green; font-weight: bold;">(Pass)</span>
+                                                            @else
+                                                                <b>Result :</b><span style="color: red; font-weight: bold;">(Fail)</span>
+                                                                @php
+                                                                    $pass_fail_validation = 1;
+                                                                @endphp
+                                                            @endif
+
+                                                        </div>
+                                                        @endif
 
                                                     </td>
                                                 @php
@@ -127,6 +163,31 @@
                                                 @endforeach
                                                 <td>
                                                     <button type="submit" class="btn btn-success">Save</button>
+                                                    <br>
+                                                    @if(!empty($totalStudentMark))
+                                                        <div style="margin-top: 10px; border: 1px solid black; padding: 15px;">
+                                                            <b>Total Student Mark :</b> {{ $totalStudentMark }}
+                                                            <hr>
+                                                            <br>
+                                                            <b>Total Subject Mark :</b> {{ $totalFullMark }}
+                                                            <hr>
+                                                            <br>
+                                                            <b>Total Passing Mark :</b> {{ $totalPassMark }}
+                                                            <hr>
+                                                            <br>
+                                                            @php
+                                                                $percentage = $totalStudentMark * 100 / $totalFullMark;
+                                                            @endphp
+                                                            <b>Percentage :</b> {{ round($percentage,2) }}%
+                                                            <hr>
+                                                            <br>
+                                                            @if($pass_fail_validation == 0)
+                                                                <b>Result :</b> <span style="color: green; font-weight: bold;">Pass</span>
+                                                            @else
+                                                                <b>Result :</b> <span style="color: red; font-weight: bold;">Fail</span>
+                                                            @endif
+                                                        </div>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </form>
@@ -168,6 +229,7 @@
             var subject_id = $(this).attr('data-val');
             var exam_id = $(this).attr('data-exam');
             var class_id = $(this).attr('data-class');
+            var id = $(this).attr('data-schedule');
             var class_work = $('#class_work_'+student_id+subject_id).val();
             var home_work = $('#home_work_'+student_id+subject_id).val();
             var test_work = $('#test_work_'+student_id+subject_id).val();
@@ -178,6 +240,7 @@
                 url: "{{ url('admin/examinations/single_submit_mark_register') }}",
                 data: {
                     "_token": "{{ csrf_token() }}",
+                    id : id,
                     student_id : student_id,
                     subject_id : subject_id,
                     exam_id : exam_id,

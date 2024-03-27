@@ -76,4 +76,9 @@ class ExamScheduleModel extends Model
     {
         return MarkRegisterModel::checkAlreadyMark($student_id, $exam_id, $class_id, $subject_id);
     }
+
+    static public function getSingle($id)
+    {
+        return self::findOrFail($id);
+    }
 }

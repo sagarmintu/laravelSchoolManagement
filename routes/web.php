@@ -137,6 +137,7 @@ Route::group(['middleware' => 'student'], function() {
     Route::get('student/my_timetable', [ClassTimetableController::class, 'myTimetable']);
     Route::get('student/exam_timetable', [ExaminationsController::class, 'examTimetable']);
     Route::get('student/calendar', [CalendarController::class, 'calendar']);
+    Route::get('student/exam_results', [ExaminationsController::class, 'exam_results']);
 });
 
 Route::group(['middleware' => 'teacher'], function() {

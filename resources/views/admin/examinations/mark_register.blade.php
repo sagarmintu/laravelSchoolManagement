@@ -115,11 +115,17 @@
                                                     <td>
                                                         <div style="margin-bottom: 10px;">
                                                             Class Work :
+                                                            
+                                                            <input type="hidden" name="mark[{{ $i }}][full_mark]" value="{{ $subject->full_mark }}">
+
+                                                            <input type="hidden" name="mark[{{ $i }}][pass_mark]" value="{{ $subject->pass_mark }}">
+
                                                             <input type="hidden" name="mark[{{ $i }}][id]" value="{{ $subject->id }}">
 
                                                             <input type="hidden" name="mark[{{ $i }}][subject_id]" value="{{ $subject->subject_id }}">
 
                                                             <input type="text" style="width: 200px;" name="mark[{{ $i }}][class_work]" class="form-control" id="class_work_{{ $student->id }}{{ $subject->subject_id }}" value="{{ !empty($getMark->class_work) ? $getMark->class_work : '' }}" placeholder="Enter Marks">
+
                                                         </div>
                                                         <div style="margin-bottom: 10px;">
                                                             Home Work :

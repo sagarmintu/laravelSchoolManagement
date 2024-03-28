@@ -250,6 +250,9 @@ class ExaminationsController extends Controller
                 $test_work = !empty($mark['test_work']) ? $mark['test_work'] : 0;
                 $exam = !empty($mark['exam']) ? $mark['exam'] : 0;
 
+                $full_marks = !empty($mark['full_mark']) ? $mark['full_mark'] : 0;
+                $pass_marks = !empty($mark['pass_mark']) ? $mark['pass_mark'] : 0;
+
                 $total_mark = $class_work + $home_work + $test_work + $exam;
 
                 if ($full_mark >= $total_mark)
@@ -270,7 +273,8 @@ class ExaminationsController extends Controller
                     $save->home_work = $home_work;
                     $save->test_work = $test_work;
                     $save->exam = $exam;
-    
+                    $save->full_mark = $full_marks;
+                    $save->pass_mark = $pass_marks;
                     $save->save();
                 }
                 else
@@ -327,6 +331,8 @@ class ExaminationsController extends Controller
             $save->home_work = $home_work;
             $save->test_work = $test_work;
             $save->exam = $exam;
+            $save->full_mark = $getExamSchedule->full_mark;
+            $save->pass_mark = $getExamSchedule->pass_mark;
             $save->save();
 
             $json['message'] = "Mark Is Registered Successfully";
@@ -347,5 +353,37 @@ class ExaminationsController extends Controller
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
         }
         return view('teacher.mark_register', $data);
+    }
+
+    public function exam_results()
+    {
+        $result = array();
+        $getExam = MarkRegisterModel::getExam(Auth::user()->id);
+        foreach($getExam as $value)
+        {
+            $dataE = array();
+            $dataE['exam_name'] = $value->exam_name;
+            $getExamSubject = MarkRegisterModel::getExamSubject($value->exam_id, Auth::user()->id);
+
+            $dataSubject = array();
+            foreach($getExamSubject as $exam)
+            {
+                $total_score = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+                $dataS = array();
+                $dataS['subject_name'] = $exam['subject_name'];
+                $dataS['class_work'] = $exam['class_work'];
+                $dataS['home_work'] = $exam['home_work'];
+                $dataS['test_work'] = $exam['test_work'];
+                $dataS['exam'] = $exam['exam'];
+                $dataS['total_score'] = $total_score;
+                $dataS['full_mark'] = $exam['full_mark'];
+                $dataS['pass_mark'] = $exam['pass_mark'];
+                $dataSubject[] = $dataS;
+            }
+            $dataE['subject'] = $dataSubject;
+            $result[] = $dataE;
+        }
+        $data['getRecord'] = $result;
+        return view('student.exam_result', $data);
     }
 }
